@@ -1,0 +1,39 @@
+/* styles added by eric hahn/ksd starting 8 July 2014 */
+
+#un_icon {
+  background: url(http://www.un.org/apps/news/en/images/en_unicon_w.png) no-repeat 0 0;
+  text-indent: 5px;
+  color: white;
+}
+
+#un_icon a {
+  color: white;
+  margin-left: 5px;  
+}
+
+.language-switcher-locale-url li a {
+  color: white;
+}
+/*
+#brand_slogan {
+  margin-left: 20px;
+}
+*/
+ul.language-switcher-locale-url {
+  position: relative;
+}
+
+ul.language-switcher-locale-url {
+  margin: 0 0 0 0;
+  float: right;
+}
+
+ul.language-switcher-locale-url li {
+  float: left;
+  list-style: none outside none;
+}
+
+ul.language-switcher-locale-url li {
+  margin: 0 0 0 0.5em;
+  padding: 0 0.5em 0 0;
+}
