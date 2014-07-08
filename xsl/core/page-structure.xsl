@@ -93,6 +93,10 @@
 
                                 <div class="row row-offcanvas row-offcanvas-right">
                                     <div class="horizontal-slider clearfix">
+                                        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                                            <xsl:apply-templates select="dri:options"/>
+                                        </div>
+
                                         <div class="col-xs-12 col-sm-12 col-md-9 main-content">
                                             <xsl:apply-templates select="*[not(self::dri:options)]"/>
 
@@ -100,10 +104,11 @@
                                                 <xsl:call-template name="buildFooter"/>
                                             </div>
                                         </div>
+<!--
                                         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
                                             <xsl:apply-templates select="dri:options"/>
                                         </div>
-
+-->
                                     </div>
                                 </div>
 
@@ -195,6 +200,10 @@
 
             <link rel="stylesheet" href="{concat($theme-path, 'styles/dspace-bootstrap-tweaks.css')}"/>
             <link rel="stylesheet" href="{concat($theme-path, 'styles/jquery-ui-1.10.3.custom.css')}"/>
+
+	    <!-- ksd styles -->
+            <link rel="stylesheet" href="/themes/undhl/styles/ksd_styles.css"/>
+            <!-- /ksd styles -->
 
             <!-- Add syndication feeds -->
             <xsl:for-each select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='feed']">
@@ -308,7 +317,62 @@
 
         <header>
             <div class="navbar navbar-default navbar-static-top" role="navigation">
+
                 <div class="container">
+
+		    <div class="row navbar_row">	  	
+				<div class="col-md-6" id="un_icon">
+					<a href="http://www.un.org/en/" title="United Nations Headquarters website">Welcome to the United Nations. It's your world.</a>
+				</div>
+				<div class="col-md-6" id="brand_language_selector">
+					<div class="content">
+						<ul class="language-switcher-locale-url">
+							<li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar"> عربي  </a></li>
+							<li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li>
+							<li class="en"><a href="http://www.un.org/" class="language-link" lang="en" xml:lang="en">English</a></li>
+							<li class="fr"><a href="http://www.un.org/fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
+							<li class="ru"><a href="http://www.un.org/ru" class="language-link" lang="ru" xml:lang="ru">Русский</a></li>
+							<li class="es last"><a href="http://www.un.org/es" class="language-link" lang="es" xml:lang="es">Español</a></li>
+						</ul>
+					</div>	
+				</div>
+		    </div>
+                    <div class="row navbar_row">
+			<div class="col-md-6" id="dhl_logo">
+				<div id="dhl_logo_img">DHL Logo</div>
+				<h1>DAG Repository</h1>
+			</div>
+			<div class="col-md-6" id="dhl_logo_selector">
+				<ul class="language-switcher-locale-url">
+					<li class="first"><a href="http://www.un.org/depts/dhl/">DHL Homepage</a></li>
+					<li><a href="">About DAG Repository</a></li>
+                                        <li><a href="http://ask.un.org/">Need Help? Ask DAG</a></li>
+					<xsl:if test="/dri:document/dri:meta/dri:userMeta/@authenticated != 'yes'">
+                                        	<li><a href="/login">Login</a></li>
+					</xsl:if>
+				</ul>	
+			</div>
+                    </div>			
+
+		    <div class="row navbar_row">
+			<ul class="nav nav-pills pull-left ">
+				<li><a href="">General Assembly</a></li>
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						Security Council<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="">All documents and publications</a></li>
+						<li><a href="">Plenary documents</a></li>
+						<li><a href="">Subsidiary Bodies</a></li>
+					</ul>	
+				</li>
+				<li><a href="">Economic and Social Council</a></li>
+				<li><a href="">Human Rights Council</a></li>
+			</ul>
+		    </div>	
+
+
                     <div class="navbar-header">
 
                         <button type="button" class="navbar-toggle" data-toggle="offcanvas">

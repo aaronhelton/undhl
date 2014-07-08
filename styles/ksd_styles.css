@@ -37,3 +37,12 @@ ul.language-switcher-locale-url li {
   margin: 0 0 0 0.5em;
   padding: 0 0.5em 0 0;
 }
+
+#dhl_logo #dhl_logo_img, h1 {
+  float: left;
+  color: white;
+} 
+
+.navbar_row {
+  margin-bottom: 10px;
+}
