@@ -113,18 +113,23 @@
                     </form>
                 </div>
             </xsl:if>
-            <xsl:apply-templates/>
-            <!-- DS-984 Add RSS Links to Options Box -->
-            <xsl:if test="count(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='feed']) != 0">
-                <div>
-                    <h6 class="ds-option-set-head">
-                        <i18n:text>xmlui.feed.header</i18n:text>
-                    </h6>
-                    <div id="ds-feed-option" class="ds-option-set list-group">
-                        <xsl:call-template name="addRSSLinks"/>
-                    </div>
-                </div>
 
+	    <!-- don't show if home page -->	
+	    <xsl:if test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'] != ''">	
+            	<xsl:apply-templates/>
+
+            	<!-- DS-984 Add RSS Links to Options Box -->
+            	<xsl:if test="count(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='feed']) != 0">
+            	    <div>
+            	        <h6 class="ds-option-set-head">
+            	            <i18n:text>xmlui.feed.header</i18n:text>
+            	        </h6>
+            	        <div id="ds-feed-option" class="ds-option-set list-group">
+            	            <xsl:call-template name="addRSSLinks"/>
+            	        </div>
+            	    </div>
+
+            	</xsl:if>
             </xsl:if>
         </div>
     </xsl:template>

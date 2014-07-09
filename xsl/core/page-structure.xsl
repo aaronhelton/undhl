@@ -91,6 +91,43 @@
 
                             <div id="main-container" class="container">
 
+			     <xsl:choose>	
+				<xsl:when test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'] = ''">
+
+					<!-- search form -->
+
+					<xsl:apply-templates select="dri:options"/>
+
+					<h3>Highlight</h3>
+
+					<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" />
+
+					<h3>Browse</h3>
+
+					<div class="row" id="home_browse_row">
+						<div class="col-md-3">
+							<h4>UN Bodies</h4>
+							<img src="http://downloads.unmultimedia.org/photo/medium/594/594030.jpg"/>
+						</div>
+                                                <div class="col-md-3">
+							<h4>Topics</h4>
+							<img src="http://downloads.unmultimedia.org/photo/medium/995/99560.jpg"/>
+                                                </div>
+                                                <div class="col-md-3">
+							<h4>Series</h4>
+							<img src="http://www.unmultimedia.org/od/yearbook/sites/default/files/styles/medium/public/2009.jpg" />
+                                                </div>
+                                                <div class="col-md-3">
+							<h4>Content type</h4>	
+							<img src="http://www.unmultimedia.org/oralhistory/wp-content/themes/DHL-OHP/images/earplugs.png" />			
+                                                </div>
+
+					</div>
+
+
+
+				</xsl:when>
+				<xsl:otherwise>
                                 <div class="row row-offcanvas row-offcanvas-right">
                                     <div class="horizontal-slider clearfix">
                                         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
@@ -111,6 +148,8 @@
 -->
                                     </div>
                                 </div>
+				</xsl:otherwise>
+			     </xsl:choose>	
 
                                 <!--
                             The footer div, dropping whatever extra information is needed on the page. It will
@@ -339,7 +378,9 @@
 		    </div>
                     <div class="row navbar_row">
 			<div class="col-md-6" id="dhl_logo">
-				<div id="dhl_logo_img">DHL Logo</div>
+				<div id="dhl_logo_img">
+					<img src="http://www.unmultimedia.org/oralhistory/wp-content/themes/DHL-OHP/images/dhl_vid.png" alt="DHL Logo" />
+				</div>
 				<h1>DAG Repository</h1>
 			</div>
 			<div class="col-md-6" id="dhl_logo_selector">
@@ -347,9 +388,53 @@
 					<li class="first"><a href="http://www.un.org/depts/dhl/">DHL Homepage</a></li>
 					<li><a href="">About DAG Repository</a></li>
                                         <li><a href="http://ask.un.org/">Need Help? Ask DAG</a></li>
-					<xsl:if test="/dri:document/dri:meta/dri:userMeta/@authenticated != 'yes'">
-                                        	<li><a href="/login">Login</a></li>
-					</xsl:if>
+
+
+                            <xsl:choose>
+                                <xsl:when test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">
+                                    <li class="dropdown">
+                                        <a id="user-dropdown-toggle" href="#" role="button" class="dropdown-toggle"
+                                           data-toggle="dropdown">
+                                            <span class="hidden-xs">
+                                                <xsl:value-of select="/dri:document/dri:meta/dri:userMeta/
+                            dri:metadata[@element='identifier' and @qualifier='firstName']"/>
+                                                <xsl:text> </xsl:text>
+                                                <xsl:value-of select="/dri:document/dri:meta/dri:userMeta/
+                            dri:metadata[@element='identifier' and @qualifier='lastName']"/>
+                                                &#160;
+                                                <b class="caret"/>
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu pull-right" role="menu"
+                                            aria-labelledby="user-dropdown-toggle" data-no-collapse="true">
+                                            <li>
+                                                <a href="{/dri:document/dri:meta/dri:userMeta/
+                            dri:metadata[@element='identifier' and @qualifier='url']}">
+                                                    <i18n:text>xmlui.EPerson.Navigation.profile</i18n:text>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{/dri:document/dri:meta/dri:userMeta/
+                            dri:metadata[@element='identifier' and @qualifier='logoutURL']}">
+                                                    <i18n:text>xmlui.dri2xhtml.structural.logout</i18n:text>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <li>
+                                        <a href="{/dri:document/dri:meta/dri:userMeta/
+                            dri:metadata[@element='identifier' and @qualifier='loginURL']}">
+                                            <span class="hidden-xs">
+                                                <i18n:text>xmlui.dri2xhtml.structural.login</i18n:text>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </xsl:otherwise>
+                            </xsl:choose>
+
+
 				</ul>	
 			</div>
                     </div>			
@@ -693,6 +778,16 @@
     <xsl:template name="buildFooter">
         <footer>
                 <div class="row">
+		     <div class="col-md-12">
+                	<ul id="footer_links">
+				<li class="first"><a href="/">DAG Repository</a></li>
+                        	<li><a href="http://www.un.org/en/aboutun/copyright/">Copyright</a></li>
+                                <li><a href="http://www.un.org/en/aboutun/terms/">Terms of use</a></li>
+                                <li><a href="http://www.un.org/en/aboutun/privacy/">Privacy Notice</a></li>
+                              	<li><a href="http://www.un.org/en/aboutun/fraudalert/">Fraud Alert</a></li>
+                        </ul>
+		    </div>
+<!--
                     <hr/>
                     <div class="col-xs-7 col-sm-8">
                         <div>
@@ -728,7 +823,9 @@
                         </div>
 
                     </div>
+-->
                 </div>
+
                 <!--Invisible link to HTML sitemap (for search engines) -->
                 <a class="hidden">
                     <xsl:attribute name="href">

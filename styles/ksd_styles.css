@@ -43,6 +43,26 @@ ul.language-switcher-locale-url li {
   color: white;
 } 
 
+#dhl_logo_img {
+  margin-right: 20px;
+}
+
 .navbar_row {
   margin-bottom: 10px;
+}
+
+#home_browse_row img {
+  width: 100%;
+}
+
+ul#footer_links {
+  list-style: none;
+  float: right;
+  display: block;	
+}
+
+ul#footer_links li {
+  list-style: none outside none;
+  float: left;
+  margin-left: 15px;
 }
