@@ -91,12 +91,19 @@
 
                             <div id="main-container" class="container">
 
-			     <xsl:choose>	
+                                <!-- search form -->
+                                <xsl:apply-templates select="dri:options">
+					<xsl:with-param name="search-only" select="1" />
+				</xsl:apply-templates>
+                                <!-- /search form -->
+
+
+			     <xsl:choose>
+
+
+	
 				<xsl:when test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'] = ''">
 
-					<!-- search form -->
-
-					<xsl:apply-templates select="dri:options"/>
 
 					<h3>Highlight</h3>
 
@@ -134,7 +141,12 @@
                                             <xsl:apply-templates select="dri:options"/>
                                         </div>
 
+
                                         <div class="col-xs-12 col-sm-12 col-md-9 main-content">
+					    <xsl:if test="/dri:document/dri:body/dri:div[@id='aspect.artifactbrowser.ItemViewer.div.item-view']">
+						Item landing
+					    </xsl:if>
+
                                             <xsl:apply-templates select="*[not(self::dri:options)]"/>
 
                                             <div class="visible-xs visible-sm">
@@ -457,7 +469,7 @@
 			</ul>
 		    </div>	
 
-
+<!--
                     <div class="navbar-header">
 
                         <button type="button" class="navbar-toggle" data-toggle="offcanvas">
@@ -601,6 +613,7 @@
                             <span class="icon-bar"></span>
                         </button>
                     </div>
+-->
                 </div>
             </div>
 

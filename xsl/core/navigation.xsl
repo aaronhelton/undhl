@@ -34,8 +34,15 @@
     -->
     <!-- TODO: figure out why i18n tags break the go button -->
     <xsl:template match="dri:options">
+
+
+<xsl:param name="search-only" select="0" /> 
+
+
         <div id="ds-options" class="word-break">
             <xsl:if test="not(contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'discover'))">
+		<xsl:if test="$search-only = '1'">
+
                 <div id="ds-search-option" class="ds-option-set">
                     <!-- The form, complete with a text box and a button, all built from attributes referenced
                  from under pageMeta. -->
@@ -112,10 +119,13 @@
                         </fieldset>
                     </form>
                 </div>
+		</xsl:if>
             </xsl:if>
 
-	    <!-- don't show if home page -->	
+<!--
 	    <xsl:if test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'] != ''">	
+-->
+	    <xsl:if test="$search-only = '0'">	
             	<xsl:apply-templates/>
 
             	<!-- DS-984 Add RSS Links to Options Box -->

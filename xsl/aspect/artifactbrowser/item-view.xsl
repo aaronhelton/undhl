@@ -96,7 +96,22 @@
 
     <xsl:template match="dim:dim" mode="itemSummaryView-DIM">
         <div class="item-summary-view-metadata">
+	    <xsl:call-template name="itemSummaryView-DIM-symbol"/>
             <xsl:call-template name="itemSummaryView-DIM-title"/>
+	    <xsl:call-template name="itemSummaryView-DIM-alt-title"/>
+	    <xsl:call-template name="itemSummaryView-DIM-authors"/>
+	    <xsl:call-template name="itemSummaryView-DIM-subjects"/>
+	    	<br/>
+		Series
+		<br/>
+	    <xsl:call-template name="itemSummaryView-DIM-type"/>	
+	    <xsl:call-template name="itemSummaryView-DIM-abstract"/>
+	    <xsl:call-template name="itemSummaryView-DIM-date"/>
+            <xsl:if test="$ds_item_view_toggle_url != ''">
+            	<xsl:call-template name="itemSummaryView-show-full"/>
+            </xsl:if>
+	
+<!--
             <div class="row">
                 <div class="col-sm-4">
                     <div class="row">
@@ -119,8 +134,29 @@
                     <xsl:call-template name="itemSummaryView-collections"/>
                 </div>
             </div>
+-->
         </div>
     </xsl:template>
+
+    <xsl:template name="itemSummaryView-DIM-symbol">
+	<div>
+		<xsl:value-of select="dim:field[@qualifier='symbol']/node()"/>
+	</div>
+    </xsl:template>
+
+    <xsl:template name="itemSummaryView-DIM-alt-title">
+        <div>
+             	alt title [need example to figure out path] 
+        </div>
+    </xsl:template>
+
+    <xsl:template name="itemSummaryView-DIM-type">
+        <div class="simple-item-view-authors item-page-field-wrapper table">
+		<h5>Content type</h5>
+                <div><xsl:value-of select="dim:field[@element='type']/node()"/></div>
+        </div>
+    </xsl:template>
+
 
     <xsl:template name="itemSummaryView-DIM-title">
         <xsl:choose>
@@ -218,6 +254,30 @@
             </div>
         </xsl:if>
     </xsl:template>
+
+<!-- subjects -->
+    <xsl:template name="itemSummaryView-DIM-subjects">
+        <xsl:if test="dim:field[@element='subject']">
+            <div class="simple-item-view-authors item-page-field-wrapper table">
+                <h5><i18n:text>xmlui.dri2xhtml.METS-1.0.item-subject</i18n:text></h5>
+                <xsl:choose>
+                    <xsl:when test="dim:field[@element='subject']">
+                        <xsl:for-each select="dim:field[@element='subject']">
+                            <div>
+                                <xsl:copy-of select="node()"/>
+                            </div>
+                        </xsl:for-each>
+                    </xsl:when>
+
+                    <xsl:otherwise>
+                        <i18n:text>xmlui.dri2xhtml.METS-1.0.no-subject</i18n:text>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </div>
+        </xsl:if>
+    </xsl:template>
+
+
 
     <xsl:template name="itemSummaryView-DIM-authors">
         <xsl:if test="dim:field[@element='contributor'][@qualifier='author' and descendant::text()] or dim:field[@element='creator' and descendant::text()] or dim:field[@element='contributor' and descendant::text()]">
