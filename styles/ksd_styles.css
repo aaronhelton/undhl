@@ -66,3 +66,14 @@ ul#footer_links li {
   float: left;
   margin-left: 15px;
 }
+
+li.ds-artifact-item {
+	padding: 10px;
+}
+
+li.ds-artifact-item.odd {
+	background-color: #f9f9f9;
+	border-top: 1px solid #ddd;
+	border-bottom: 1px solid #ddd;
+}
+

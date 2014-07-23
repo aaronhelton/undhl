@@ -126,9 +126,24 @@
 	    <xsl:if test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'] != ''">	
 -->
 	    <xsl:if test="$search-only = '0'">	
+
+<!--
+		hiding in order to specify which blocks to show explicitly
+
             	<xsl:apply-templates/>
+-->
+
+		<xsl:apply-templates select="dri:list[@n='discovery']"/>
+		<xsl:apply-templates select="dri:list[@n='browse']"/>
+		<xsl:apply-templates select="dri:list[@n='context']"/>
+		<xsl:if test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">
+			<xsl:apply-templates select="dri:list[@n='account']"/>
+		</xsl:if>
+		<xsl:apply-templates select="dri:list[@n='administrative']"/>
+
 
             	<!-- DS-984 Add RSS Links to Options Box -->
+<!--
             	<xsl:if test="count(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='feed']) != 0">
             	    <div>
             	        <h6 class="ds-option-set-head">
@@ -140,6 +155,7 @@
             	    </div>
 
             	</xsl:if>
+-->
             </xsl:if>
         </div>
     </xsl:template>
@@ -172,6 +188,8 @@
         </xsl:for-each>
     </xsl:template>
 
+
+
     <xsl:template match="dri:options//dri:list">
         <xsl:apply-templates select="dri:head"/>
         <xsl:apply-templates select="dri:item"/>
@@ -190,6 +208,7 @@
     </xsl:template>
 
 
+
     <xsl:template match="dri:options//dri:item">
         <div>
             <xsl:call-template name="standardAttributes">
@@ -200,20 +219,26 @@
     </xsl:template>
 
     <xsl:template match="dri:options//dri:item[dri:xref]">
-        <a href="{dri:xref/@target}">
-            <xsl:call-template name="standardAttributes">
-                <xsl:with-param name="class">list-group-item ds-option</xsl:with-param>
-            </xsl:call-template>
-            <xsl:choose>
-                <xsl:when test="dri:xref/node()">
-                    <xsl:apply-templates select="dri:xref/node()"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="dri:xref"/>
-                </xsl:otherwise>
-            </xsl:choose>
-
-        </a>
+	<xsl:choose>
+		<!-- never show communities and collections -->
+		<xsl:when test="dri:xref[@target = '/community-list']">
+		</xsl:when>
+		<xsl:otherwise>	
+		        <a href="{dri:xref/@target}">
+		            <xsl:call-template name="standardAttributes">
+		                <xsl:with-param name="class">list-group-item ds-option</xsl:with-param>
+		            </xsl:call-template>
+		            <xsl:choose>
+		                <xsl:when test="dri:xref/node()">
+		                    <xsl:apply-templates select="dri:xref/node()"/>
+		                </xsl:when>
+		                <xsl:otherwise>
+		                    <xsl:value-of select="dri:xref"/>
+		                </xsl:otherwise>
+		            </xsl:choose>
+		        </a>
+		</xsl:otherwise>
+	</xsl:choose>
     </xsl:template>
 
     <xsl:template match="dri:options/dri:list/dri:head" priority="3">
@@ -221,6 +246,7 @@
             <xsl:with-param name="class">ds-option-set-head</xsl:with-param>
         </xsl:call-template>
     </xsl:template>
+
 
     <xsl:template match="dri:options/dri:list//dri:list/dri:head" priority="3">
         <a class="list-group-item active">

@@ -156,6 +156,18 @@
 
 
             <div class="col-sm-9 artifact-description">
+
+
+                <xsl:if test="dri:list[@n=(concat($handle, ':undr.identifier.symbol'))]">
+                	<xsl:for-each select="dri:list[@n=(concat($handle, ':undr.identifier.symbol'))]/dri:item">
+                                   <xsl:apply-templates select="."/>
+                                    <xsl:if test="count(following-sibling::dri:item) != 0">
+                                        <xsl:text>; </xsl:text>
+                                    </xsl:if>
+                        </xsl:for-each>
+                </xsl:if>
+
+
                 <xsl:element name="a">
                     <xsl:attribute name="href">
                         <xsl:choose>
@@ -190,6 +202,32 @@
                 </xsl:element>
                 <div class="artifact-info">
                     <span class="author h4">    <small>
+
+
+			<xsl:choose>
+                		<xsl:when test="dri:list[@n=(concat($handle, ':undr.contributor.corporate'))]">
+                        		<xsl:for-each select="dri:list[@n=(concat($handle, ':undr.contributor.corporate'))]/dri:item">
+                                	   <xsl:apply-templates select="."/>
+                                	    <xsl:if test="count(following-sibling::dri:item) != 0">
+                                	        <xsl:text>; </xsl:text>
+                                	    </xsl:if>
+                        		</xsl:for-each>
+				</xsl:when>
+				<xsl:when test="dri:list[@n=(concat($handle, ':undr.contributor.personal'))]">
+                                        <xsl:for-each select="dri:list[@n=(concat($handle, ':undr.contributor.personal'))]/dri:item">
+                                           <xsl:apply-templates select="."/>
+                                            <xsl:if test="count(following-sibling::dri:item) != 0">
+                                                <xsl:text>; </xsl:text>
+                                            </xsl:if>
+                                        </xsl:for-each>
+				</xsl:when>
+                	        <xsl:otherwise>
+                	                <i18n:text>xmlui.dri2xhtml.METS-1.0.no-author</i18n:text>
+                	        </xsl:otherwise>
+			</xsl:choose>
+
+<!--
+
                         <xsl:choose>
                             <xsl:when test="dri:list[@n=(concat($handle, ':dc.contributor.author'))]">
                                 <xsl:for-each select="dri:list[@n=(concat($handle, ':dc.contributor.author'))]/dri:item">
@@ -197,7 +235,6 @@
                                         <xsl:apply-templates select="."/>
                                     </xsl:variable>
                                     <span>
-                                        <!--Check authority in the mets document-->
                                         <xsl:if test="$metsDoc/mets:METS/mets:dmdSec/mets:mdWrap/mets:xmlData/dim:dim/dim:field[@element='contributor' and @qualifier='author' and . = $author]/@authority">
                                             <xsl:attribute name="class">
                                                 <xsl:text>ds-dc_contributor_author-authority</xsl:text>
@@ -231,6 +268,7 @@
                                 <i18n:text>xmlui.dri2xhtml.METS-1.0.no-author</i18n:text>
                             </xsl:otherwise>
                         </xsl:choose>
+-->
                         </small></span>
                     <xsl:text> </xsl:text>
                     <xsl:if test="dri:list[@n=(concat($handle, ':dc.date.issued'))]">

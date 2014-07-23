@@ -95,21 +95,26 @@
 
 
     <xsl:template match="dim:dim" mode="itemSummaryView-DIM">
-        <div class="item-summary-view-metadata">
-	    <xsl:call-template name="itemSummaryView-DIM-symbol"/>
-            <xsl:call-template name="itemSummaryView-DIM-title"/>
-	    <xsl:call-template name="itemSummaryView-DIM-alt-title"/>
-	    <xsl:call-template name="itemSummaryView-DIM-authors"/>
-	    <xsl:call-template name="itemSummaryView-DIM-subjects"/>
-	    	<br/>
-		Series
-		<br/>
-	    <xsl:call-template name="itemSummaryView-DIM-type"/>	
-	    <xsl:call-template name="itemSummaryView-DIM-abstract"/>
-	    <xsl:call-template name="itemSummaryView-DIM-date"/>
-            <xsl:if test="$ds_item_view_toggle_url != ''">
-            	<xsl:call-template name="itemSummaryView-show-full"/>
-            </xsl:if>
+
+	<div class="row">
+		<div class="col-md-9">
+
+
+        		<div class="item-summary-view-metadata">
+			    <xsl:call-template name="itemSummaryView-DIM-symbol"/>
+		            <xsl:call-template name="itemSummaryView-DIM-title"/>
+			    <xsl:call-template name="itemSummaryView-DIM-alt-title"/>
+			    <xsl:call-template name="itemSummaryView-DIM-authors"/>
+			    <xsl:call-template name="itemSummaryView-DIM-subjects"/>
+	    			<br/>
+				Series
+				<br/>
+			    <xsl:call-template name="itemSummaryView-DIM-type"/>	
+			    <xsl:call-template name="itemSummaryView-DIM-abstract"/>
+			    <xsl:call-template name="itemSummaryView-DIM-date"/>
+		            <xsl:if test="$ds_item_view_toggle_url != ''">
+		            	<xsl:call-template name="itemSummaryView-show-full"/>
+		            </xsl:if>
 	
 <!--
             <div class="row">
@@ -135,7 +140,20 @@
                 </div>
             </div>
 -->
-        </div>
+        		</div>
+
+		</div>
+
+		<div class="col-md-3">
+
+			<xsl:call-template name="itemSummaryView-DIM-files"/>
+
+			<h5>Related Item</h5>
+
+		</div>
+	</div>
+
+
     </xsl:template>
 
     <xsl:template name="itemSummaryView-DIM-symbol">
@@ -156,6 +174,56 @@
                 <div><xsl:value-of select="dim:field[@element='type']/node()"/></div>
         </div>
     </xsl:template>
+
+
+    <xsl:template name="itemSummaryView-DIM-files">
+
+        <xsl:if test="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']">
+		<h5>Full Text</h5>
+
+		<ul>
+		<xsl:for-each select="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file">
+	
+			<li>
+				<xsl:text disable-output-escaping="yes">&lt;a href="</xsl:text><xsl:value-of select="mets:FLocat/@xlink:href"/><xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
+					<xsl:value-of select="mets:FLocat/@xlink:label"/>
+				<xsl:text disable-output-escaping="yes">&lt;/a"&gt;</xsl:text>
+			</li>
+
+		</xsl:for-each>
+		</ul>
+<!--
+            <div class="license-info table">
+                <p>
+                    <i18n:text>xmlui.dri2xhtml.METS-1.0.license-text</i18n:text>
+                </p>
+                <ul class="list-unstyled">
+                    <xsl:apply-templates select="./mets:fileSec/mets:fileGrp[@USE='CC-LICENSE' or @USE='LICENSE']" mode="simple"/>
+                </ul>
+            </div>
+-->
+        </xsl:if>
+
+<!--
+        <xsl:choose>
+            <xsl:when test="count(dim:field[@element='language']) &gt; 0">
+		    <h5>Full Text</h5>	
+                    <ul>
+                        <xsl:for-each select="dim:field[@element='language']">
+				<li>
+                                	<xsl:value-of select="./node()"/>
+				</li>
+                        </xsl:for-each>
+                    </ul>
+            </xsl:when>
+            <xsl:otherwise>
+                    <h5>Full Text not available</h5>
+            </xsl:otherwise>
+        </xsl:choose>
+-->
+    </xsl:template>
+
+
 
 
     <xsl:template name="itemSummaryView-DIM-title">
@@ -280,6 +348,7 @@
 
 
     <xsl:template name="itemSummaryView-DIM-authors">
+AUTHORS!
         <xsl:if test="dim:field[@element='contributor'][@qualifier='author' and descendant::text()] or dim:field[@element='creator' and descendant::text()] or dim:field[@element='contributor' and descendant::text()]">
             <div class="simple-item-view-authors item-page-field-wrapper table">
                 <h5><i18n:text>xmlui.dri2xhtml.METS-1.0.item-author</i18n:text></h5>
