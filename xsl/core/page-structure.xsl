@@ -107,48 +107,47 @@
 
 					<h3>Highlight</h3>
 
+					<div class="row">
+						<div id="carousel-example-generic" class="carousel slide col-md-6 col-md-offset-3" data-ride="carousel">
+						  <!-- Indicators -->
+						  <ol class="carousel-indicators">
+						    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+						    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+						  </ol>
 
+						  <!-- Wrapper for slides -->
+						  <div class="carousel-inner">
+						    <div class="item active">
+							<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
+							<div class="carousel-caption">
+								<h3><a href="">First slide</a></h3>
+							</div>
+						    </div>
+						    <div class="item">
+							<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
+							<div class="carousel-caption">
+								<h3><a href="">Second slide</a></h3>
+							</div>
+						    </div>
+						    <div class="item">
+							<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
+							<div class="carousel-caption">
+								<h3><a href="">Third slide</a></h3>
+							</div>
+						    </div>
+						  </div>
 
-<div class="row">
-<div id="carousel-example-generic" class="carousel slide col-md-6 col-md-offset-3" data-ride="carousel">
-  <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
+						  <!-- Controls -->
+						  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+						    <span class="glyphicon glyphicon-chevron-left"></span>
+						  </a>
+						  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+						    <span class="glyphicon glyphicon-chevron-right"></span>
+						  </a>
+						</div>
+					</div>
 
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner">
-    <div class="item active">
-	<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
-      	<div class="carousel-caption">
-		<h3><a href="">First slide</a></h3>  
-      	</div>
-    </div>
-    <div class="item">
-	<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
-        <div class="carousel-caption">
-                <h3><a href="">Second slide</a></h3>
-        </div>
-    </div>
-    <div class="item">
-	<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
-        <div class="carousel-caption">
-                <h3><a href="">Third slide</a></h3>
-        </div>
-    </div>
-  </div>
-
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
-</div>
-</div>
 
 					<h3>Browse</h3>
 
@@ -186,22 +185,45 @@
 				<xsl:otherwise>
                                 <div class="row row-offcanvas row-offcanvas-right">
                                     <div class="horizontal-slider clearfix">
-                                        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-                                            <xsl:apply-templates select="dri:options"/>
-                                        </div>
+					<xsl:choose>
+						<xsl:when test="/dri:document/dri:body/dri:div[@id='aspect.artifactbrowser.ItemViewer.div.item-view']" >
 
+							<div class="col-xs-12 col-sm-12 col-md-12 main-content">
+								<xsl:apply-templates select="*[not(self::dri:options)]"/>
+								<div class="visible-xs visible-sm">
+									<xsl:call-template name="buildFooter"/>
+								</div>
 
+							</div>							
+
+						</xsl:when>
+						<xsl:otherwise>
+                                        		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                                            			<xsl:apply-templates select="dri:options"/>
+                                        		</div>
+                                                        <div class="col-xs-12 col-sm-12 col-md-9 main-content">
+                                                                <xsl:apply-templates select="*[not(self::dri:options)]"/>
+                                                                <div class="visible-xs visible-sm">
+                                                                        <xsl:call-template name="buildFooter"/>
+                                                                </div>
+
+                                                        </div>
+
+						</xsl:otherwise>
+					</xsl:choose>
+
+<!--
                                         <div class="col-xs-12 col-sm-12 col-md-9 main-content">
 					    <xsl:if test="/dri:document/dri:body/dri:div[@id='aspect.artifactbrowser.ItemViewer.div.item-view']">
 						Item landing
 					    </xsl:if>
-
                                             <xsl:apply-templates select="*[not(self::dri:options)]"/>
 
                                             <div class="visible-xs visible-sm">
                                                 <xsl:call-template name="buildFooter"/>
                                             </div>
                                         </div>
+-->
 <!--
                                         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
                                             <xsl:apply-templates select="dri:options"/>
@@ -512,7 +534,7 @@
                     </div>			
 
 		    <div class="row navbar_row">
-			<ul class="nav nav-pills pull-left ">
+			<ul class="nav nav-pills pull-left bodies_list">
 				<!-- <li><a href="">General Assembly</a></li> -->
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">

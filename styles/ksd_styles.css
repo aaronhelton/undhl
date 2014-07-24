@@ -77,3 +77,25 @@ li.ds-artifact-item.odd {
 	border-bottom: 1px solid #ddd;
 }
 
+.item_landing_page_left_sidebar {
+	background-color: #f9f9f9;
+	border: 1px solid #ddd;
+}
+
+.item_landing_page_left_sidebar ul li {
+    	list-style-type: none;
+}
+
+i.glyphicon-file {
+	margin-right: 5px;
+}
+
+.bodies_list a {
+	color: #ffffff;
+}
+.bodies_list a:hover {
+        color: #607890;
+}
+
+
+

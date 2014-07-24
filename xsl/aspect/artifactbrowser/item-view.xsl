@@ -101,6 +101,7 @@
 
 
         		<div class="item-summary-view-metadata">
+			    <xsl:call-template name="itemSummaryView-DIM-identifier-uri"/>	
 			    <xsl:call-template name="itemSummaryView-DIM-symbol"/>
 		            <xsl:call-template name="itemSummaryView-DIM-title"/>
 			    <xsl:call-template name="itemSummaryView-DIM-alt-title"/>
@@ -144,11 +145,11 @@
 
 		</div>
 
-		<div class="col-md-3">
+		<div class="col-md-3 item_landing_page_left_sidebar">
 
 			<xsl:call-template name="itemSummaryView-DIM-files"/>
 
-			<h5>Related Item</h5>
+			<h4>Related Items</h4>
 
 		</div>
 	</div>
@@ -160,6 +161,15 @@
 	<div>
 		<xsl:value-of select="dim:field[@qualifier='symbol']/node()"/>
 	</div>
+    </xsl:template>
+
+    <xsl:template name="itemSummaryView-DIM-identifier-uri">
+        <div>
+		Citable URL: 
+		<xsl:text disable-output-escaping="yes">&lt;a href="</xsl:text><xsl:value-of select="dim:field[@qualifier='uri']/node()"/><xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
+			<xsl:value-of select="dim:field[@qualifier='uri']/node()"/>
+		<xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
+        </div>
     </xsl:template>
 
     <xsl:template name="itemSummaryView-DIM-alt-title">
@@ -179,15 +189,17 @@
     <xsl:template name="itemSummaryView-DIM-files">
 
         <xsl:if test="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']">
-		<h5>Full Text</h5>
+		<h4>Full Text</h4>
 
 		<ul>
 		<xsl:for-each select="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file">
 	
 			<li>
 				<xsl:text disable-output-escaping="yes">&lt;a href="</xsl:text><xsl:value-of select="mets:FLocat/@xlink:href"/><xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
+					<i aria-hidden="true" class="glyphicon glyphicon-file"></i>
 					<xsl:value-of select="mets:FLocat/@xlink:label"/>
-				<xsl:text disable-output-escaping="yes">&lt;/a"&gt;</xsl:text>
+					(<xsl:value-of select="round(@SIZE div 1000)"/>Kb)		
+				<xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
 			</li>
 
 		</xsl:for-each>
