@@ -79,11 +79,12 @@ li.ds-artifact-item.odd {
 
 .item_landing_page_left_sidebar {
 	background-color: #f9f9f9;
-	border: 1px solid #ddd;
+	border: 1px solid #ddd; 
 }
 
 .item_landing_page_left_sidebar ul li {
     	list-style-type: none;
+	margin: 5px 0;
 }
 
 i.glyphicon-file {
@@ -93,9 +94,13 @@ i.glyphicon-file {
 .bodies_list a {
 	color: #ffffff;
 }
+
 .bodies_list a:hover {
         color: #607890;
 }
 
+.item-summary-view-metadata h2 {
+	margin-top: 15px;
+}
 
 

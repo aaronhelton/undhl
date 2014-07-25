@@ -105,8 +105,6 @@
 				<xsl:when test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'] = ''">
 
 
-					<h3>Highlight</h3>
-
 					<div class="row">
 						<div id="carousel-example-generic" class="carousel slide col-md-6 col-md-offset-3" data-ride="carousel">
 						  <!-- Indicators -->
@@ -149,7 +147,7 @@
 					</div>
 
 
-					<h3>Browse</h3>
+					<h3>Browse</h3> 
 
 					<div class="row" id="home_browse_row">
 						<div class="col-md-3">
@@ -472,14 +470,26 @@
 		    </div>
                     <div class="row navbar_row">
 			<div class="col-md-6" id="dhl_logo">
+<!--
 				<div id="dhl_logo_img">
 					<img src="http://www.unmultimedia.org/oralhistory/wp-content/themes/DHL-OHP/images/dhl_vid.png" alt="DHL Logo" />
 				</div>
+-->
+				<div id="dhl_logo_img">
+					<a href="http://www.un.org/depts/dhl/"><img src="/themes/undhl/images/dhl_logo.png" alt="DHL Logo" /></a>
+				</div>
 				<h1>DAG Repository</h1>
+
 			</div>
+<!--
 			<div class="col-md-6" id="dhl_logo_selector">
+
+				<a href="http://www.un.org/depts/dhl/"><img src="/themes/undhl/images/dhl_logo.png" alt="DHL Logo" /></a>
+-->
+<!--
 				<ul class="language-switcher-locale-url">
 					<li class="first"><a href="http://www.un.org/depts/dhl/">DHL Homepage</a></li>
+-->
 					<!-- <li><a href="">About DAG Repository</a></li> -->
                                         <!-- <li><a href="http://ask.un.org/">Need Help? Ask DAG</a></li> -->
 
@@ -528,24 +538,31 @@
                                 </xsl:otherwise>
                             </xsl:choose>
 -->
-
+<!--
 				</ul>	
+-->
+<!--
 			</div>
+-->
                     </div>			
 
 		    <div class="row navbar_row">
-			<ul class="nav nav-pills pull-left bodies_list">
+
+			<div class="col-md-6" id="dr_nav_left">
+
+			   <ul class="nav nav-pills pull-left bodies_list">
 				<!-- <li><a href="">General Assembly</a></li> -->
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						Security Council<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu" role="menu">
-						<li><a href="">All documents and publications</a></li>
-						<li><a href="">Plenary documents</a></li>
-						<li><a href="">Subsidiary Bodies</a></li>
+						<li><a href="/discover?filtertype=issuingBody&amp;filter_relational_operator=equals&amp;filter=Security+Council">All documents and publications</a></li>
+						<li><a href="/discover?filtertype=issuingBody&amp;filter_relational_operator=equals&amp;filter=Security+Council+Plenary">Plenary documents</a></li>
+						<li><a href="/discover?filtertype=issuingBody&amp;filter_relational_operator=equals&amp;filter=Security+Council+Subsidiary+Bodies">Subsidiary Bodies</a></li>
 					</ul>	
 				</li>
+<!--
 				<li><a href="">About DAG Repository</a></li>
 				<li><a href="">Search</a></li>
                                 <li><a href="">Learn</a></li>
@@ -561,9 +578,16 @@
 						<li><a href="">Contact Us</a></li>
                                         </ul>
 				</li>
+-->
+			    </ul>
 
+			</div>
 
+			<div class="col-md-6" id="dr_nav_right">
 
+			    <ul class="nav nav-pills pull-right bodies_list">	
+
+				<li><a href="">About DAG Repository</a></li>
 
                             <xsl:choose>
                                 <xsl:when test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">
@@ -616,6 +640,7 @@
 				<li><a href="">Human Rights Council</a></li>
 				-->
 			</ul>
+			</div>
 		    </div>	
 
 <!--
