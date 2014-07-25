@@ -38,18 +38,26 @@ ul.language-switcher-locale-url li {
   padding: 0 0.5em 0 0;
 }
 
-#dhl_logo #dhl_logo_img, h1 {
+#dhl_logo #dhl_logo_img {
   float: left;
   color: white;
 } 
+
+#dhl_dr_logo h1 {
+  float: right;
+  color: white;	
+  font-weight: bold;
+}
 
 #dhl_logo_img {
   margin-right: 20px;
 }
 
+/*
 .navbar_row {
   margin-bottom: 10px;
 }
+*/
 
 #home_browse_row img {
   width: 100%;
@@ -77,7 +85,7 @@ li.ds-artifact-item.odd {
 	border-bottom: 1px solid #ddd;
 }
 
-.item_landing_page_left_sidebar {
+.item_landing_page_left_sidebar, .related_items_box {
 	background-color: #f9f9f9;
 	border: 1px solid #ddd; 
 }
@@ -85,6 +93,11 @@ li.ds-artifact-item.odd {
 .item_landing_page_left_sidebar ul li {
     	list-style-type: none;
 	margin: 5px 0;
+}
+
+.related_items_box {
+	padding: 10px;
+	margin-top: 20px;
 }
 
 i.glyphicon-file {
@@ -102,5 +115,38 @@ i.glyphicon-file {
 .item-summary-view-metadata h2 {
 	margin-top: 15px;
 }
+
+/*
+.item-summary-view-metadata .row {
+	margin-top: 10px;
+}
+*/
+
+#un_brand_bar {
+    background-color: rgb(96, 120, 144);
+}
+
+#dhl_brand_bar {
+	margin-top: 10px;
+}
+
+.nav-pills>li>a, .dropdown-menu {
+   	border-radius: 0; 	
+}
+
+.nav-pills>li>a:hover {
+	background-color: transparent;
+	color: #ffffff;
+}
+
+#dr_top_level_bar .nav .open>a {
+        background-color: rgb(96, 120, 144);
+        color: #ffffff;
+}
+
+ul.breadcrumb li a {
+	color: #eeeeee;
+}
+
 
 

@@ -449,26 +449,34 @@
         <header>
             <div class="navbar navbar-default navbar-static-top" role="navigation">
 
+		<div id="un_brand_bar">
+
+<!--
+                    	<div class="row navbar_row">
+-->
+			<div class="container">
+                                <div class="col-md-6" id="un_icon">
+                                        <a href="http://www.un.org/en/" title="United Nations Headquarters website">Welcome to the United Nations. It's your world.</a>
+                                </div>
+                                <div class="col-md-6" id="brand_language_selector">
+                                        <div class="content">
+                                                <ul class="language-switcher-locale-url">
+                                                        <li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar"> ﻉﺮﺒﻳ  </a></li>
+                                                        <li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li>
+                                                        <li class="en"><a href="http://www.un.org/" class="language-link" lang="en" xml:lang="en">English</a></li>
+                                                        <li class="fr"><a href="http://www.un.org/fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
+                                                        <li class="ru"><a href="http://www.un.org/ru" class="language-link" lang="ru" xml:lang="ru">Русский</a></li>
+                                                        <li class="es last"><a href="http://www.un.org/es" class="language-link" lang="es" xml:lang="es">Español</a></li>
+                                                </ul>
+                                        </div>
+                                </div>
+
+			</div>
+		</div>
+
                 <div class="container">
 
-		    <div class="row navbar_row">	  	
-				<div class="col-md-6" id="un_icon">
-					<a href="http://www.un.org/en/" title="United Nations Headquarters website">Welcome to the United Nations. It's your world.</a>
-				</div>
-				<div class="col-md-6" id="brand_language_selector">
-					<div class="content">
-						<ul class="language-switcher-locale-url">
-							<li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar"> عربي  </a></li>
-							<li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li>
-							<li class="en"><a href="http://www.un.org/" class="language-link" lang="en" xml:lang="en">English</a></li>
-							<li class="fr"><a href="http://www.un.org/fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
-							<li class="ru"><a href="http://www.un.org/ru" class="language-link" lang="ru" xml:lang="ru">Русский</a></li>
-							<li class="es last"><a href="http://www.un.org/es" class="language-link" lang="es" xml:lang="es">Español</a></li>
-						</ul>
-					</div>	
-				</div>
-		    </div>
-                    <div class="row navbar_row">
+                    <div class="row navbar_row" id="dhl_brand_bar">
 			<div class="col-md-6" id="dhl_logo">
 <!--
 				<div id="dhl_logo_img">
@@ -478,75 +486,13 @@
 				<div id="dhl_logo_img">
 					<a href="http://www.un.org/depts/dhl/"><img src="/themes/undhl/images/dhl_logo.png" alt="DHL Logo" /></a>
 				</div>
-				<h1>DAG Repository</h1>
-
 			</div>
-<!--
-			<div class="col-md-6" id="dhl_logo_selector">
-
-				<a href="http://www.un.org/depts/dhl/"><img src="/themes/undhl/images/dhl_logo.png" alt="DHL Logo" /></a>
--->
-<!--
-				<ul class="language-switcher-locale-url">
-					<li class="first"><a href="http://www.un.org/depts/dhl/">DHL Homepage</a></li>
--->
-					<!-- <li><a href="">About DAG Repository</a></li> -->
-                                        <!-- <li><a href="http://ask.un.org/">Need Help? Ask DAG</a></li> -->
-
-<!--
-                            <xsl:choose>
-                                <xsl:when test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">
-                                    <li class="dropdown">
-                                        <a id="user-dropdown-toggle" href="#" role="button" class="dropdown-toggle"
-                                           data-toggle="dropdown">
-                                            <span class="hidden-xs">
-                                                <xsl:value-of select="/dri:document/dri:meta/dri:userMeta/
-                            dri:metadata[@element='identifier' and @qualifier='firstName']"/>
-                                                <xsl:text> </xsl:text>
-                                                <xsl:value-of select="/dri:document/dri:meta/dri:userMeta/
-                            dri:metadata[@element='identifier' and @qualifier='lastName']"/>
-                                                &#160;
-                                                <b class="caret"/>
-                                            </span>
-                                        </a>
-                                        <ul class="dropdown-menu pull-right" role="menu"
-                                            aria-labelledby="user-dropdown-toggle" data-no-collapse="true">
-                                            <li>
-                                                <a href="{/dri:document/dri:meta/dri:userMeta/
-                            dri:metadata[@element='identifier' and @qualifier='url']}">
-                                                    <i18n:text>xmlui.EPerson.Navigation.profile</i18n:text>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="{/dri:document/dri:meta/dri:userMeta/
-                            dri:metadata[@element='identifier' and @qualifier='logoutURL']}">
-                                                    <i18n:text>xmlui.dri2xhtml.structural.logout</i18n:text>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </xsl:when>
-                                <xsl:otherwise>
-                                    <li>
-                                        <a href="{/dri:document/dri:meta/dri:userMeta/
-                            dri:metadata[@element='identifier' and @qualifier='loginURL']}">
-                                            <span class="hidden-xs">
-                                                <i18n:text>xmlui.dri2xhtml.structural.login</i18n:text>
-                                            </span>
-                                        </a>
-                                    </li>
-                                </xsl:otherwise>
-                            </xsl:choose>
--->
-<!--
-				</ul>	
--->
-<!--
-			</div>
--->
+			<div class="col-md-6" id="dhl_dr_logo">
+				<h1>DAG Repository</h1>	
+			</div>	
                     </div>			
 
-		    <div class="row navbar_row">
+		    <div class="row navbar_row" id="dr_top_level_bar">
 
 			<div class="col-md-6" id="dr_nav_left">
 
