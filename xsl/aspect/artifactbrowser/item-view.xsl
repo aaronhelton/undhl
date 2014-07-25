@@ -146,7 +146,7 @@
 
 		</div>
 
-		<div class="col-md-3 item_landing_page_left_sidebar">
+		<div class="col-md-3">
 
 			<xsl:call-template name="itemSummaryView-DIM-files"/>
 
@@ -193,7 +193,7 @@
 					<xsl:when test="dim:field[@element='type']">	
 						<xsl:for-each select="dim:field[@element='type']">
 							<a>
-								<xsl:attribute name="href">/discover?filtertype=type&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
+								<xsl:attribute name="href">/discover?filtertype=contentType&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
 								<xsl:copy-of select="node()"/>
 							</a>
 				 			<xsl:if test="position() != last()">
@@ -211,31 +211,23 @@
     <xsl:template name="itemSummaryView-DIM-files">
 
         <xsl:if test="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']">
-		<h4>Full Text</h4>
+		<div class="item_landing_page_left_sidebar">
+			<h4>Full Text</h4>
 
-		<ul>
-		<xsl:for-each select="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file">
+			<ul>
+			<xsl:for-each select="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file">
 	
-			<li>
-				<xsl:text disable-output-escaping="yes">&lt;a href="</xsl:text><xsl:value-of select="mets:FLocat/@xlink:href"/><xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
-					<i aria-hidden="true" class="glyphicon glyphicon-file"></i>
-					<xsl:value-of select="mets:FLocat/@xlink:label"/>
-					(<xsl:value-of select="round(@SIZE div 1000)"/>Kb)		
-				<xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
-			</li>
+				<li>
+					<xsl:text disable-output-escaping="yes">&lt;a href="</xsl:text><xsl:value-of select="mets:FLocat/@xlink:href"/><xsl:text disable-output-escaping="yes">"&gt;</xsl:text>
+						<i aria-hidden="true" class="glyphicon glyphicon-file"></i>
+						<xsl:value-of select="mets:FLocat/@xlink:label"/>
+						(<xsl:value-of select="round(@SIZE div 1000)"/>Kb)		
+					<xsl:text disable-output-escaping="yes">&lt;/a&gt;</xsl:text>
+				</li>
 
-		</xsl:for-each>
-		</ul>
-<!--
-            <div class="license-info table">
-                <p>
-                    <i18n:text>xmlui.dri2xhtml.METS-1.0.license-text</i18n:text>
-                </p>
-                <ul class="list-unstyled">
-                    <xsl:apply-templates select="./mets:fileSec/mets:fileGrp[@USE='CC-LICENSE' or @USE='LICENSE']" mode="simple"/>
-                </ul>
-            </div>
--->
+			</xsl:for-each>
+			</ul>
+		</div>
         </xsl:if>
 
 <!--

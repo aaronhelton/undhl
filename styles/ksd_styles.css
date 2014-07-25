@@ -95,6 +95,10 @@ li.ds-artifact-item.odd {
 	margin: 5px 0;
 }
 
+.item_landing_page_left_sidebar {
+	padding: 10px;
+}
+
 .related_items_box {
 	padding: 10px;
 	margin-top: 20px;
@@ -148,5 +152,7 @@ ul.breadcrumb li a {
 	color: #eeeeee;
 }
 
-
+.carousel-caption h3 a {
+	color: #ffffff;
+}
 

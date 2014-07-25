@@ -106,7 +106,7 @@
 
 
 					<div class="row">
-						<div id="carousel-example-generic" class="carousel slide col-md-6 col-md-offset-3" data-ride="carousel">
+						<div id="carousel-example-generic" class="carousel slide col-md-12" data-ride="carousel">
 						  <!-- Indicators -->
 						  <ol class="carousel-indicators">
 						    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -117,21 +117,36 @@
 						  <!-- Wrapper for slides -->
 						  <div class="carousel-inner">
 						    <div class="item active">
-							<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
+							<img src="/themes/undhl/images/edit-559993.jpg" alt="pi1" class="img-responsive" />
 							<div class="carousel-caption">
-								<h3><a href="">First slide</a></h3>
+								<h3>
+								<a>
+									<xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=democratic+republic+of+the+congo+situation</xsl:attribute>
+									The situation in the Democratic republic of the Congo
+								</a>
+								</h3>
 							</div>
 						    </div>
 						    <div class="item">
-							<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
+							<img src="/themes/undhl/images/edit-594678.jpg" alt="pi1" class="img-responsive" />
 							<div class="carousel-caption">
-								<h3><a href="">Second slide</a></h3>
+								<h3>
+                                                                <a>
+                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=children+in+armed+conflicts</xsl:attribute>
+                                                                       	Children in armed conflicts 
+                                                                </a>
+                                                                </h3>
 							</div>
 						    </div>
 						    <div class="item">
-							<img src="http://downloads.unmultimedia.org/photo/medium/451/451877.jpg" alt="pi1" />
+							<img src="/themes/undhl/images/edit-556774.jpg" aedit-559993.jpglt="pi1" class="img-responsive" />
 							<div class="carousel-caption">
-								<h3><a href="">Third slide</a></h3>
+                                                                <h3>
+                                                                <a>
+                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=syrian+arab+republic</xsl:attribute>
+                                                                        The situation in the Syrian Arab Republic
+                                                                </a>
+                                                                </h3>
 							</div>
 						    </div>
 						  </div>
@@ -153,25 +168,25 @@
 						<div class="col-md-3">
 							<h4><a href="/browse?type=issuingbody">UN Bodies</a></h4>
 							<a href="/browse?type=issuingbody">
-								<img src="http://downloads.unmultimedia.org/photo/medium/594/594030.jpg"/>
+								<img src="/themes/undhl/images/cropped-595698.jpg"/>
 							</a>
 						</div>
                                                 <div class="col-md-3">
 							<h4><a href="/browse?type=topic">Topics</a></h4>
 							<a href="/browse?type=topic">
-								<img src="http://downloads.unmultimedia.org/photo/medium/995/99560.jpg"/>
+								<img src="/themes/undhl/images/cropped-129885.jpg"/>
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
 							<h4><a href="/browse?type=series">Series</a></h4>
 							<a href="/browse?type=series">
-								<img src="http://www.unmultimedia.org/od/yearbook/sites/default/files/styles/medium/public/2009.jpg" />
+								<img src="/themes/undhl/images/cropped-YB-shadow.jpg" />
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
 							<h4><a href="/browse?type=contenttype">Content type</a></h4>	
 							<a href="/browse?type=contenttype">
-								<img src="http://www.unmultimedia.org/oralhistory/wp-content/themes/DHL-OHP/images/earplugs.png" />			
+								<img src="/themes/undhl/images/cropped-492744.jpg" />			
 							</a>
                                                 </div>
 
