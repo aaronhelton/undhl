@@ -115,13 +115,14 @@
 						  </ol>
 
 						  <!-- Wrapper for slides -->
+						  <!-- to do: wrap bare text below in messages for translation -->
 						  <div class="carousel-inner">
 						    <div class="item active">
 							<img src="/themes/undhl/images/edit-559993.jpg" alt="pi1" class="img-responsive" />
 							<div class="carousel-caption">
 								<h3>
 								<a>
-									<xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=democratic+republic+of+the+congo+situation</xsl:attribute>
+									<xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=DEMOCRATIC+REPUBLIC+OF+THE+CONGO+SITUATION</xsl:attribute>
 									The situation in the Democratic republic of the Congo
 								</a>
 								</h3>
@@ -132,7 +133,7 @@
 							<div class="carousel-caption">
 								<h3>
                                                                 <a>
-                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=children+in+armed+conflicts</xsl:attribute>
+                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=CHILDREN+IN+ARMED+CONFLICTS</xsl:attribute>
                                                                        	Children in armed conflicts 
                                                                 </a>
                                                                 </h3>
@@ -143,7 +144,7 @@
 							<div class="carousel-caption">
                                                                 <h3>
                                                                 <a>
-                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=syrian+arab+republic</xsl:attribute>
+                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=SYRIAN+ARAB+REPUBLIC</xsl:attribute>
                                                                         The situation in the Syrian Arab Republic
                                                                 </a>
                                                                 </h3>
