@@ -144,7 +144,7 @@
 							<div class="carousel-caption">
                                                                 <h3>
                                                                 <a>
-                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=SYRIAN+ARAB+REPUBLIC</xsl:attribute>
+                                                                        <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=SYRIAN+ARAB+REPUBLIC+SITUATION</xsl:attribute>
                                                                         The situation in the Syrian Arab Republic
                                                                 </a>
                                                                 </h3>
