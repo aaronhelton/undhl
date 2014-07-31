@@ -167,26 +167,26 @@
 
 					<div class="row" id="home_browse_row">
 						<div class="col-md-3">
-							<h4><a href="/browse?type=issuingbody">UN Bodies</a></h4>
-							<a href="/browse?type=issuingbody">
+							<h4><a href="/search-filter?field=issuingBody">UN Bodies</a></h4>
+							<a href="/search-filter?field=issuingBody">
 								<img src="/themes/undhl/images/cropped-595698.jpg"/>
 							</a>
 						</div>
                                                 <div class="col-md-3">
-							<h4><a href="/browse?type=topic">Topics</a></h4>
-							<a href="/browse?type=topic">
+							<h4><a href="/search-filter?field=topic">Topics</a></h4>
+							<a href="/search-filter?field=topic">
 								<img src="/themes/undhl/images/cropped-129885.jpg"/>
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
-							<h4><a href="/browse?type=series">Series</a></h4>
-							<a href="/browse?type=series">
+							<h4><a href="/search-filter?field=series">Series</a></h4>
+							<a href="/search-filter?field=series">
 								<img src="/themes/undhl/images/cropped-YB-shadow.jpg" />
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
-							<h4><a href="/browse?type=contenttype">Content type</a></h4>	
-							<a href="/browse?type=contenttype">
+							<h4><a href="/search-filter?field=contentType">Content type</a></h4>	
+							<a href="/search-filter?field=contentType">
 								<img src="/themes/undhl/images/cropped-492744.jpg" />			
 							</a>
                                                 </div>
