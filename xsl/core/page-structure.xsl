@@ -123,7 +123,8 @@
 								<h3>
 								<a>
 									<xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=DEMOCRATIC+REPUBLIC+OF+THE+CONGO+SITUATION</xsl:attribute>
-									The situation in the Democratic republic of the Congo
+									<!-- The situation in the Democratic republic of the Congo -->
+                                                                        <i18n:text>xmlui.ArtifactBrowser.navigation.head_congo_situation</i18n:text>
 								</a>
 								</h3>
 							</div>
@@ -134,7 +135,8 @@
 								<h3>
                                                                 <a>
                                                                         <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=CHILDREN+IN+ARMED+CONFLICTS</xsl:attribute>
-                                                                       	Children in armed conflicts 
+                                                                       	<!-- Children in armed conflicts -->
+                                                                        <i18n:text>xmlui.ArtifactBrowser.navigation.head_children_in_armed_conflicts</i18n:text>
                                                                 </a>
                                                                 </h3>
 							</div>
@@ -145,7 +147,8 @@
                                                                 <h3>
                                                                 <a>
                                                                         <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=SYRIAN+ARAB+REPUBLIC+SITUATION</xsl:attribute>
-                                                                        The situation in the Syrian Arab Republic
+                                                                        <!-- The situation in the Syrian Arab Republic -->
+                                                                        <i18n:text>xmlui.ArtifactBrowser.navigation.head_syria_situation</i18n:text>
                                                                 </a>
                                                                 </h3>
 							</div>
@@ -163,7 +166,7 @@
 					</div>
 
 
-					<h3>Browse</h3> 
+					<h3><i18n:text>xmlui.ArtifactBrowser.Navigation.head_discover</i18n:text></h3> 
 
 					<div class="row" id="home_browse_row">
 						<div class="col-md-3">
