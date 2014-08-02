@@ -107,7 +107,8 @@
 			    <!-- <xsl:call-template name="itemSummaryView-DIM-alt-title"/> -->
 			    <xsl:call-template name="itemSummaryView-DIM-abstract"/>	
 			    <xsl:call-template name="itemSummaryView-DIM-authors"/>
-			    <xsl:call-template name="itemSummaryView-DIM-date"/>	
+			    <xsl:call-template name="itemSummaryView-DIM-date"/>
+			    <xsl:call-template name="itemSummaryView-DIM-agenda"/>	
 			    <xsl:call-template name="itemSummaryView-DIM-subjects"/>
 			    <xsl:call-template name="itemSummaryView-DIM-series"/>	
 			    <xsl:call-template name="itemSummaryView-DIM-type"/>	
@@ -349,6 +350,37 @@
         </xsl:if>
     </xsl:template>
 
+
+<!-- agenda -->
+    <xsl:template name="itemSummaryView-DIM-agenda">
+        <xsl:if test="dim:field[@element='subject' and @qualifier='agenda']">
+                <div class="row">
+                        <div class="col-md-2">
+                               	Agenda 
+                        </div>
+                        <div class="col-md-10">
+                                <xsl:choose>
+                                    <xsl:when test="dim:field[@element='subject' and @qualifier='agenda']">
+                                        <xsl:for-each select="dim:field[@element='subject' and @qualifier='agenda']">
+                                            <a>
+                                                <xsl:attribute name="href">/discover?filtertype=subject&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
+                                                <xsl:copy-of select="node()"/>
+                                            </a>
+                                             <xsl:if test="position() != last()">
+                                                -
+                                             </xsl:if>
+                                        </xsl:for-each>
+                                    </xsl:when>
+                                    <xsl:otherwise>
+                                        <i18n:text>xmlui.dri2xhtml.METS-1.0.no-agenda</i18n:text>
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                        </div>
+                </div>
+        </xsl:if>
+    </xsl:template>
+
+
 <!-- subjects -->
     <xsl:template name="itemSummaryView-DIM-subjects">
         <xsl:if test="dim:field[@element='subject']">
@@ -359,14 +391,14 @@
 			<div class="col-md-10">
                 		<xsl:choose>
                 		    <xsl:when test="dim:field[@element='subject']">
-                        		<xsl:for-each select="dim:field[@element='subject']">
-                        		    <a>
-						<xsl:attribute name="href">/discover?filtertype=subject&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-						<xsl:copy-of select="node()"/> 
-                        		    </a>
-					     <xsl:if test="position() != last()">	 
-					    	- 
-					     </xsl:if>		
+                        		<xsl:for-each select="dim:field[@element='subject' and not(@qualifier='agenda')]">
+                        			    <a>
+							<xsl:attribute name="href">/discover?filtertype=subject&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
+							<xsl:copy-of select="node()"/> 
+                        			    </a>
+						     <xsl:if test="position() != last()">	 
+						    	- 
+						     </xsl:if>	
                         		</xsl:for-each>
 		                    </xsl:when>
 		                    <xsl:otherwise>
@@ -795,7 +827,7 @@
     </xsl:template>
 
     <xsl:template name="itemSummaryView-show-full">
-	<div class="row">
+	<div class="row itemSummaryView-show-full">
 		<div class="col-md-12">  	
             		<a>
             		    <xsl:attribute name="href"><xsl:value-of select="$ds_item_view_toggle_url"/></xsl:attribute>
@@ -1076,9 +1108,12 @@
                     <dd class="word-break">
                         <xsl:call-template name="getFileTypeDesc">
                             <xsl:with-param name="mimetype">
+				 <xsl:value-of select="@MIMETYPE"/>
+<!--
                                 <xsl:value-of select="substring-before(@MIMETYPE,'/')"/>
                                 <xsl:text>/</xsl:text>
                                 <xsl:value-of select="substring-before(substring-after(@MIMETYPE,'/'),';')"/>
+-->
                             </xsl:with-param>
                         </xsl:call-template>
                     </dd>

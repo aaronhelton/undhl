@@ -115,7 +115,6 @@
 						  </ol>
 
 						  <!-- Wrapper for slides -->
-						  <!-- to do: wrap bare text below in messages for translation -->
 						  <div class="carousel-inner">
 						    <div class="item active">
 							<img src="/themes/undhl/images/edit-559993.jpg" alt="pi1" class="img-responsive" />
@@ -123,8 +122,7 @@
 								<h3>
 								<a>
 									<xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=DEMOCRATIC+REPUBLIC+OF+THE+CONGO+SITUATION</xsl:attribute>
-									<!-- The situation in the Democratic republic of the Congo -->
-                                                                        <i18n:text>xmlui.ArtifactBrowser.navigation.head_congo_situation</i18n:text>
+									<i18n:text>xmlui.ArtifactBrowser.navigation.head_congo_situation</i18n:text>
 								</a>
 								</h3>
 							</div>
@@ -135,19 +133,17 @@
 								<h3>
                                                                 <a>
                                                                         <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=CHILDREN+IN+ARMED+CONFLICTS</xsl:attribute>
-                                                                       	<!-- Children in armed conflicts -->
-                                                                        <i18n:text>xmlui.ArtifactBrowser.navigation.head_children_in_armed_conflicts</i18n:text>
+                                                                       	<i18n:text>xmlui.ArtifactBrowser.navigation.head_children_in_armed_conflicts</i18n:text>
                                                                 </a>
                                                                 </h3>
 							</div>
 						    </div>
 						    <div class="item">
-							<img src="/themes/undhl/images/edit-556774.jpg" aedit-559993.jpglt="pi1" class="img-responsive" />
+							<img src="/themes/undhl/images/cropped-516848.jpg" alt="pi1" class="img-responsive" />
 							<div class="carousel-caption">
                                                                 <h3>
                                                                 <a>
                                                                         <xsl:attribute name="href">/discover?filtertype_1=agenda&amp;filter_relational_operator_1=equals&amp;filter_1=SYRIAN+ARAB+REPUBLIC+SITUATION</xsl:attribute>
-                                                                        <!-- The situation in the Syrian Arab Republic -->
                                                                         <i18n:text>xmlui.ArtifactBrowser.navigation.head_syria_situation</i18n:text>
                                                                 </a>
                                                                 </h3>
@@ -203,7 +199,7 @@
                                 <div class="row row-offcanvas row-offcanvas-right">
                                     <div class="horizontal-slider clearfix">
 					<xsl:choose>
-						<xsl:when test="/dri:document/dri:body/dri:div[@id='aspect.artifactbrowser.ItemViewer.div.item-view']" >
+						<xsl:when test="/dri:document/dri:body/dri:div[@id='aspect.artifactbrowser.ItemViewer.div.item-view'] or contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'search-filter')" >
 
 							<div class="col-xs-12 col-sm-12 col-md-12 main-content">
 								<xsl:apply-templates select="*[not(self::dri:options)]"/>
@@ -292,8 +288,9 @@
 
             <link rel="shortcut icon">
                 <xsl:attribute name="href">
-                    <xsl:value-of select="$theme-path"/>
-                    <xsl:text>lib/images/favicon.ico</xsl:text>
+                    <!-- <xsl:value-of select="$theme-path"/> -->
+			<xsl:text>/themes/undhl/images/favicon.ico</xsl:text>
+			<!-- <xsl:text>lib/images/favicon.ico</xsl:text> -->
                 </xsl:attribute>
             </link>
             <link rel="apple-touch-icon">
@@ -507,7 +504,7 @@
 				</div>
 			</div>
 			<div class="col-md-6" id="dhl_dr_logo">
-				<h1>DAG Repository</h1>	
+				<h1><a href="/">DAG Repository</a></h1>	
 			</div>	
                     </div>			
 
@@ -551,6 +548,8 @@
 			<div class="col-md-6" id="dr_nav_right">
 
 			    <ul class="nav nav-pills pull-right bodies_list">	
+
+				<li><a href="/discover">Discover</a></li>
 
 				<li><a href="">About DAG Repository</a></li>
 
@@ -932,8 +931,8 @@
                 <div class="row">
 		     <div class="col-md-12">
                 	<ul id="footer_links">
-				<li class="first"><a href="">Contact Us</a></li>
-				<li><a href="">Request a Copy</a></li>
+				<li class="first"><a href="/contact">Contact Us</a></li>
+				<!-- <li><a href="">Request a Copy</a></li> -->
 				<li><a href="/">About the DAG Repository</a></li>
                         	<li><a href="http://www.un.org/en/aboutun/copyright/">Copyright</a></li>
                                 <li><a href="http://www.un.org/en/aboutun/terms/">Terms of use</a></li>

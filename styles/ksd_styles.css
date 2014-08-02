@@ -49,6 +49,15 @@ ul.language-switcher-locale-url li {
   font-weight: bold;
 }
 
+#dhl_dr_logo h1 a {
+  color: white;
+}
+
+#dhl_dr_logo h1 a:hover {
+  text-decoration: none;
+}
+
+
 #dhl_logo_img {
   margin-right: 20px;
 }
@@ -92,7 +101,7 @@ li.ds-artifact-item.odd {
 
 .item_landing_page_left_sidebar ul li {
     	list-style-type: none;
-	margin: 5px 0;
+	margin: 10px 0;
 }
 
 .item_landing_page_left_sidebar {
@@ -156,3 +165,25 @@ ul.breadcrumb li a {
 	color: #ffffff;
 }
 
+.itemSummaryView-show-full {
+	text-align: right;
+	padding-top: 10px;
+}
+
+@media (max-width: 991px) {
+  #brand_language_selector, #dr_top_level_bar {
+	display: none;
+  }
+  #dhl_dr_logo h1 {
+	float: left;
+  }
+  .carousel-caption h3 {
+        font-size: 1em;
+  }
+
+}
+/*
+.carousel-caption h3 {
+	font-size: 1.75em;
+}
+*/

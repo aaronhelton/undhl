@@ -35,12 +35,11 @@
     <!-- TODO: figure out why i18n tags break the go button -->
     <xsl:template match="dri:options">
 
-
 <xsl:param name="search-only" select="0" /> 
 
-
         <div id="ds-options" class="word-break">
-            <xsl:if test="not(contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'discover'))">
+            <xsl:choose>
+	      <xsl:when test="not(contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'discover'))">
 		<xsl:if test="$search-only = '1'">
 
                 <div id="ds-search-option" class="ds-option-set">
@@ -120,7 +119,10 @@
                     </form>
                 </div>
 		</xsl:if>
-            </xsl:if>
+              </xsl:when>
+              <xsl:otherwise>
+	      </xsl:otherwise>	
+            </xsl:choose>
 
 <!--
 	    <xsl:if test="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'] != ''">	
@@ -134,7 +136,9 @@
 -->
 
 		<xsl:apply-templates select="dri:list[@n='discovery']"/>
-		<xsl:apply-templates select="dri:list[@n='browse']"/>
+		<xsl:if test="not(contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'discover'))">
+			<xsl:apply-templates select="dri:list[@n='browse']"/>
+		</xsl:if>
 		<xsl:apply-templates select="dri:list[@n='context']"/>
 		<xsl:if test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">
 			<xsl:apply-templates select="dri:list[@n='account']"/>
