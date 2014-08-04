@@ -363,7 +363,7 @@
                                     <xsl:when test="dim:field[@element='subject' and @qualifier='agenda']">
                                         <xsl:for-each select="dim:field[@element='subject' and @qualifier='agenda']">
                                             <a>
-                                                <xsl:attribute name="href">/discover?filtertype=subject&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
+                                                <xsl:attribute name="href">/discover?filtertype=agenda&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
                                                 <xsl:copy-of select="node()"/>
                                             </a>
                                              <xsl:if test="position() != last()">
