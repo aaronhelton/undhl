@@ -550,9 +550,10 @@
 
 			    <ul class="nav nav-pills pull-right bodies_list">	
 
+				<!-- To do: internationalize these strings -->
 				<li><a href="/discover">Discover</a></li>
 
-				<li><a href="">About DAG Repository</a></li>
+				<li><a href="http://research.un.org/en/repository/about">About DAG Repository</a></li>
 
                             <xsl:choose>
                                 <xsl:when test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">
