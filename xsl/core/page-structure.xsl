@@ -277,6 +277,7 @@
     references to stylesheets pulled directly from the pageMeta element. -->
     <xsl:template name="buildHead">
         <head>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
             <!-- Use the .htaccess and remove these lines to avoid edge case issues.
