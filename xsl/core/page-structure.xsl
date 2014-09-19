@@ -476,7 +476,7 @@
                                 <div class="col-md-6" id="brand_language_selector">
                                         <div class="content">
                                                 <ul class="language-switcher-locale-url">
-                                                        <li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar"> ﻉﺮﺒﻳ  </a></li>
+                                                        <li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar">عربي</a></li>
                                                         <li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li>
                                                         <li class="en"><a href="http://www.un.org/" class="language-link" lang="en" xml:lang="en">English</a></li>
                                                         <li class="fr"><a href="http://www.un.org/fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
