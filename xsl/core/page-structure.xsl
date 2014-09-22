@@ -162,25 +162,29 @@
 
 					<div class="row" id="home_browse_row">
 						<div class="col-md-3">
-							<h4><a href="/search-filter?field=issuingBody">UN Bodies</a></h4>
+							<!-- <h4><a href="/search-filter?field=issuingBody">UN Bodies</a></h4> -->
+							<h4><a href="/search-filter?field=issuingBody"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_issuingbody</i18n:text></a></h4>
 							<a href="/search-filter?field=issuingBody">
 								<img src="/themes/undhl/images/cropped-595698.jpg"/>
 							</a>
 						</div>
                                                 <div class="col-md-3">
-							<h4><a href="/search-filter?field=topic">Topics</a></h4>
+							<!-- <h4><a href="/search-filter?field=topic">Topics</a></h4> -->
+							<h4><a href="/search-filter?field=topic"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_topic</i18n:text></a></h4>
 							<a href="/search-filter?field=topic">
 								<img src="/themes/undhl/images/cropped-129885.jpg"/>
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
-							<h4><a href="/search-filter?field=series">Series</a></h4>
+							<!-- <h4><a href="/search-filter?field=series">Series</a></h4> -->
+							<h4><a href="/search-filter?field=series"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_series</i18n:text></a></h4>
 							<a href="/search-filter?field=series">
 								<img src="/themes/undhl/images/cropped-YB-shadow.jpg" />
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
-							<h4><a href="/search-filter?field=contentType">Content type</a></h4>	
+							<!-- <h4><a href="/search-filter?field=contentType">Content type</a></h4>	-->
+							<h4><a href="/search-filter?field=contentType"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_contenttype</i18n:text></a></h4>	
 							<a href="/search-filter?field=contentType">
 								<img src="/themes/undhl/images/cropped-492744.jpg" />			
 							</a>
@@ -514,6 +518,7 @@
 			   <ul class="nav nav-pills pull-left bodies_list">
 				<!-- <li><a href="">General Assembly</a></li> -->
 				<li class="dropdown">
+                                        <!-- To do: internationalize these -->
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						Security Council<span class="caret"></span>
 					</a>
@@ -926,6 +931,7 @@
     </xsl:template>
 
     <!-- Like the header, the footer contains various miscellaneous text, links, and image placeholders -->
+    <!-- To do: internationalize these as well -->
     <xsl:template name="buildFooter">
         <footer>
                 <div class="row">
