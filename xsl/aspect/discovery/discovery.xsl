@@ -182,7 +182,9 @@
                     <h4>
                         <xsl:choose>
                             <xsl:when test="dri:list[@n=(concat($handle, ':dc.title'))]">
-                                <xsl:apply-templates select="dri:list[@n=(concat($handle, ':dc.title'))]/dri:item"/>
+                                <!-- This feels a bit hackish but it is a quick solution to discovery's bad concatenation of multiple titles.
+                                     Ideally we would want to detect the locale and select an appropriate title... -->
+                                <xsl:apply-templates select="dri:list[@n=(concat($handle, ':dc.title'))]/dri:item[1]"/>
                             </xsl:when>
                             <xsl:otherwise>
                                 <i18n:text>xmlui.dri2xhtml.METS-1.0.no-title</i18n:text>
