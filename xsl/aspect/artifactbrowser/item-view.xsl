@@ -391,7 +391,7 @@
 			<div class="col-md-10">
                 		<xsl:choose>
                 		    <xsl:when test="dim:field[@element='subject']">
-                        		<xsl:for-each select="dim:field[@element='subject' and not(@qualifier='agenda')]">
+                        		<xsl:for-each select="dim:field[@element='subject' and not(@qualifier='agenda') and not (@qualifier='keywords')]">
                         			    <a>
 							<xsl:attribute name="href">/discover?filtertype=subject&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
 							<xsl:copy-of select="node()"/> 
