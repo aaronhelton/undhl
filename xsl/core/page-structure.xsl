@@ -177,7 +177,7 @@
                                                 </div>
                                                 <div class="col-md-3">
 							<!-- <h4><a href="/search-filter?field=series">Series</a></h4> -->
-							<h4><a href="/search-filter?field=series"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_series</i18n:text></a></h4>
+							<h4><a href="/community-list"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_series</i18n:text></a></h4>
 							<a href="/search-filter?field=series">
 								<img src="/themes/undhl/images/cropped-YB-shadow.jpg" />
 							</a>
@@ -480,12 +480,12 @@
                                 <div class="col-md-6" id="brand_language_selector">
                                         <div class="content">
                                                 <ul class="language-switcher-locale-url">
-                                                        <li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar">عربي</a></li>
-                                                        <li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li>
-                                                        <li class="en"><a href="http://www.un.org/" class="language-link" lang="en" xml:lang="en">English</a></li>
-                                                        <li class="fr"><a href="http://www.un.org/fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
-                                                        <li class="ru"><a href="http://www.un.org/ru" class="language-link" lang="ru" xml:lang="ru">Русский</a></li>
-                                                        <li class="es last"><a href="http://www.un.org/es" class="language-link" lang="es" xml:lang="es">Español</a></li>
+                                                        <!-- <li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar">عربي</a></li>-->
+                                                        <!-- <li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li> -->
+                                                        <li class="en"><a href="/?locale-attribute=en" class="language-link" lang="en" xml:lang="en">English</a></li>
+                                                        <li class="fr"><a href="/?locale-attribute=fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
+                                                        <!-- <li class="ru"><a href="http://www.un.org/ru" class="language-link" lang="ru" xml:lang="ru">Русский</a></li>-->
+                                                        <li class="es last"><a href="/?locale-attribute=es" class="language-link" lang="es" xml:lang="es">Español</a></li>
                                                 </ul>
                                         </div>
                                 </div>
@@ -507,7 +507,7 @@
 				</div>
 			</div>
 			<div class="col-md-6" id="dhl_dr_logo">
-				<h1><a href="/">DAG Repository</a></h1>	
+				<h1><a href="/"><i18n:text>xmlui.general.dspace_home</i18n:text></a></h1>	
 			</div>	
                     </div>			
 
