@@ -178,7 +178,7 @@
                                                 <div class="col-md-3">
 							<!-- <h4><a href="/search-filter?field=series">Series</a></h4> -->
 							<h4><a href="/community-list"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_series</i18n:text></a></h4>
-							<a href="/search-filter?field=series">
+							<a href="/community-list">
 								<img src="/themes/undhl/images/cropped-YB-shadow.jpg" />
 							</a>
                                                 </div>
