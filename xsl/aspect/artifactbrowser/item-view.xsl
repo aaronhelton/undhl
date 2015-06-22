@@ -101,9 +101,17 @@
 
 
         		<div class="item-summary-view-metadata">
+			    <xsl:call-template name="itemSummaryView-DIM-rights"/>
 			    <xsl:call-template name="itemSummaryView-DIM-identifier-uri"/>	
 			    <xsl:call-template name="itemSummaryView-DIM-symbol"/>
-		            <xsl:call-template name="itemSummaryView-DIM-title"/>
+                            <div class="row">
+                              <div class="col-xs-2 pull-left">
+                                <xsl:call-template name="itemSummaryView-DIM-thumbnail"/>
+                              </div>
+                              <div class="col-xs-10 pull-left">
+		                <xsl:call-template name="itemSummaryView-DIM-title"/>
+                              </div>
+                            </div>
 			    <!-- <xsl:call-template name="itemSummaryView-DIM-alt-title"/> -->
 			    <xsl:call-template name="itemSummaryView-DIM-abstract"/>	
 			    <xsl:call-template name="itemSummaryView-DIM-authors"/>
@@ -152,9 +160,30 @@
 			<xsl:call-template name="itemSummaryView-DIM-files"/>
 
 		</div>
+                <div class="col-md-3">
+			<xsl:call-template name="itemSummaryView-DIM-Context"/>
+                </div>
 	</div>
 
 
+    </xsl:template>
+
+    <xsl:template name="itemSummaryView-DIM-rights">
+      <div class="row">
+        <xsl:if test="dim:field[@element='rights']">
+          <div class="col-md-12 alert alert-danger">
+            <xsl:value-of select="dim:field[@element='rights']/node()"/>
+            <xsl:if test="dim:field[@element='rights' and @qualifier='uri']">
+              <p>
+                <a>
+                  <xsl:attribute name="href"><xsl:value-of select="dim:field[@element='rights' and @qualifier='uri']"/></xsl:attribute>
+                  <xsl:value-of select="dim:field[@element='rights' and @qualifier='uri']"/>
+                </a>
+              </p>
+            </xsl:if>
+          </div>
+        </xsl:if>
+      </div>
     </xsl:template>
 
     <xsl:template name="itemSummaryView-DIM-symbol">
@@ -251,6 +280,15 @@
     </xsl:template>
 
 
+    <xsl:template name="itemSummaryView-DIM-Context">
+      <xsl:if test="$thisUserMeta/@authenticated = 'yes'">
+        <xsl:variable name="thisUserEmail" select="$thisUserMeta/dri:metadata[@element='identifier' and @qualifier='email']"/>
+        <xsl:variable name="thisItemProvenance" select="dim:field[@element='description' and @qualifier='provenance']"/>
+        <xsl:if test="contains($thisItemProvenance,$thisUserEmail)">
+          <xsl:apply-templates select="$document//dri:list[@id='aspect.viewArtifacts.Navigation.list.context']"/>
+        </xsl:if>
+      </xsl:if>
+    </xsl:template>
 
 
     <xsl:template name="itemSummaryView-DIM-title">
@@ -332,7 +370,20 @@
                     <xsl:for-each select="dim:field[@element='description' and @qualifier='abstract']">
                         <xsl:choose>
                             <xsl:when test="node()">
-                                <xsl:copy-of select="node()"/>
+                              <!-- The following renders line breaks in the abtract, but only if they contain <br> tags at appropriate locations -->
+                              <xsl:choose>
+                                <xsl:when test="contains(node(),'&lt;br&gt;')">
+                                  <p>
+                                  <xsl:value-of select="substring-before(node(),'&lt;br&gt;')"/>
+                                  </p>
+                                  <p>
+                                  <xsl:value-of select="substring-after(node(),'&lt;br&gt;')"/>
+    				  </p>
+				</xsl:when>
+                                <xsl:otherwise>
+                                  <xsl:copy-of select="node()"/>
+				</xsl:otherwise>
+                              </xsl:choose>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:text>&#160;</xsl:text>
@@ -438,7 +489,8 @@
 
 <!-- relation -->
     <xsl:template name="itemSummaryView-DIM-relation">
-        <xsl:if test="dim:field[@element='relation']">
+        <!-- The following test excludes ispartof and haspart relations -->
+        <xsl:if test="dim:field[@element='relation'][@qualifier='addendum'] or dim:field[@element='relation'][@qualifier='agenda'] or dim:field[@element='relation'][@qualifier='corrigendum'] or dim:field[@element='relation'][@qualifier='draft'] or dim:field[@element='relation'][@qualifier='meeting'] or dim:field[@element='relation'][@qualifier='original'] or dim:field[@element='relation'][@qualifier='report'] or dim:field[@element='relation'][@qualifier='resolution'] or dim:field[@element='relation'][@qualifier='resumption'] or dim:field[@element='relation'][@qualifier='revision'] or dim:field[@element='relation'][@qualifier='statement']">
 
 	   <div class="related_items_box"> 
 
@@ -447,280 +499,228 @@
 		<!-- forced to hardcode values because dSpace doesn't support xsl v2 -->
 
                 <xsl:if test="dim:field[@element='relation'][@qualifier='addendum']">
-                        <div class="row">
-                                <div class="col-md-2">
-                                        Addendum
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='addendum']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
+                  <div class="row">
+                    <div class="col-md-2">
+			<!-- To do: internationalize this and other labels here -->
+                      Addendum
+                    </div>
+                    <div class="col-md-10">
+                      <xsl:for-each select="dim:field[@element='relation'][@qualifier='addendum']">
+                        <a>
+                          <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                          <xsl:copy-of select="node()"/>
+                        </a>
+                        <xsl:if test="position() != last()"> - </xsl:if>
+                      </xsl:for-each>
+                    </div>
+                  </div>
                 </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='agenda']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Agenda
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='agenda']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='corrigendum']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Corrigendum
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='corrigendum']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='draft']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Draft
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='draft']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='haspart']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Has part
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='haspart']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>	
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='ispartof']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Is part of
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='ispartof']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-
-		<xsl:if test="dim:field[@element='relation'][@qualifier='meeting']">
-			<div class="row">
-                        	<div class="col-md-2">
-                                	Meeting
-                                </div>
-				<div class="col-md-10">
-					<xsl:for-each select="dim:field[@element='relation'][@qualifier='meeting']">
-						<a>
-							<xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-							<xsl:copy-of select="node()"/>
-						</a>
-						<xsl:if test="position() != last()"> - </xsl:if>	
-					</xsl:for-each>
-				</div>
-			</div>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='agenda']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Agenda
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='agenda']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
 		</xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='original']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Original
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='original']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='report']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Report
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='report']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='resolution']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Resolution
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='resolution']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='resumption']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Resumption
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='resumption']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='revision']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Revision
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='revision']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-
-                <xsl:if test="dim:field[@element='relation'][@qualifier='statement']">
-                        <div class="row">
-                                <div class="col-md-2">
-					Statement
-                                </div>
-                                <div class="col-md-10">
-                                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='statement']">
-                                                <a>
-                                                        <xsl:attribute name="href">/discover?filtertype=symbol&amp;filter_relational_operator=equals&amp;filter=<xsl:copy-of select="node()"/></xsl:attribute>
-                                                        <xsl:copy-of select="node()"/>
-                                                </a>
-						<xsl:if test="position() != last()"> - </xsl:if>
-                                        </xsl:for-each>
-                                </div>
-                        </div>
-                </xsl:if>
-	    </div>	
-
-<!--	
-		<ul>
-			<xsl:for-each select="dim:field[@element='relation'][@qualifier='meeting']">
-				<li><xsl:value-of select="node()"/></li>
-			</xsl:for-each>	
-		</ul>	
--->
-<!--
-		<xsl:for-each select="dim:field[@element='relation']" >
-			<div class="row">
-				<div class="col-md-2">
-					<xsl:value-of select="@qualifier"/>
-				</div>
-				<div class="col-md-10">
-					<xsl:value-of select="node()"/>
-				</div>
-			</div>
-		</xsl:for-each>
--->
-
-<!--
-		<xsl:for-each-group select="dim:field[@element='relation']" group-by="@qualifier">
-
-		</xsl:for-each-group>	
--->
-<!--
-		<xsl:for-each-group select="dim:field[@element='relation']" group-by="@qualifier">
-
-                <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-10">
--->
-<!--
-                                <xsl:choose>
-                                    <xsl:when test="dim:field[@element='series']">
-                                        <xsl:for-each select="dim:field[@element='series']">
-                                            <div>
-                                                <xsl:copy-of select="node()"/>
-                                            </div>
-                                        </xsl:for-each>
-                                    </xsl:when>
-                                    <xsl:otherwise>
-                                        <i18n:text>xmlui.dri2xhtml.METS-1.0.no-series</i18n:text>
-                                    </xsl:otherwise>
-                                </xsl:choose>
--->
-<!--
-                        </div>
-                </div>
-		</xsl:for-each-group>
--->
+		<xsl:if test="dim:field[@element='relation'][@qualifier='corrigendum']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Corrigendum
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='corrigendum']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='draft']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Draft
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='draft']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+                <!-- Hiding haspart and ispartof in favor of a forthcoming replacement -->
+		<!--
+		<xsl:if test="dim:field[@element='relation'][@qualifier='haspart']">
+                    <div class="row">
+                      <div class="col-md-2">
+                        Has part
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='haspart']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='ispartof']">
+                    <div class="row">
+                      <div class="col-md-2">
+                        Is part of
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='ispartof']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		-->
+		<xsl:if test="dim:field[@element='relation'][@qualifier='meeting']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Meeting
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='meeting']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='original']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Original
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='original']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='report']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Report
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='report']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='resolution']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Resolution
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='resolution']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='resumption']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Resumption
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='resumption']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='revision']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Revision
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='revision']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+		<xsl:if test="dim:field[@element='relation'][@qualifier='statement']">
+                    <div class="row">
+                      <div class="col-md-2">
+  						<!-- To do: internationalize this and other labels here -->
+                        Statement
+                      </div>
+                      <div class="col-md-10">
+                        <xsl:for-each select="dim:field[@element='relation'][@qualifier='statement']">
+                          <a>
+                            <xsl:attribute name="href">/services/symbol/<xsl:copy-of select="node()"/></xsl:attribute>
+                            <xsl:copy-of select="node()"/>
+                          </a>
+                          <xsl:if test="position() != last()"> - </xsl:if>
+                        </xsl:for-each>
+                      </div>
+                    </div>
+		</xsl:if>
+	  </div>
         </xsl:if>
     </xsl:template>
 
