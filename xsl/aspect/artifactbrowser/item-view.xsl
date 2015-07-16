@@ -124,6 +124,7 @@
 		            	<xsl:call-template name="itemSummaryView-show-full"/>
 		            </xsl:if>
 			    <xsl:call-template name="itemSummaryView-DIM-relation"/>
+			    <xsl:call-template name="itemSummaryView-collections"/>
 
 			    
 	
@@ -242,7 +243,8 @@
 
         <xsl:if test="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']">
 		<div class="item_landing_page_left_sidebar">
-			<h4>Full Text</h4>
+			<!-- <h4>Full Text</h4> -->
+			<h4><i18n:text>xmlui.ArtifactBrowser.ItemViewer.fulltext</i18n:text></h4>
 
 			<ul>
 			<xsl:for-each select="/mets:METS/mets:fileSec/mets:fileGrp[@USE='CONTENT']/mets:file">
@@ -722,12 +724,35 @@
 		</xsl:if>
 	  </div>
         </xsl:if>
+        <!-- Now the series information -->
+        <xsl:if test="dim:field[@element='relation'][@qualifier='ispartof']">
+          <div class="related_items_box">
+          <div class="row">
+            <div class="col-md-2">
+              <!-- todo: internationalize this -->
+              <h4>
+              <xsl:text>Series</xsl:text>
+              </h4>
+            </div>
+            <div class="col-md-10">
+              <xsl:value-of select="dim:field[@element='relation'][@qualifier='ispartof']"/>
+              <xsl:if test="dim:field[@element='series'][@qualifier='numbering']">
+                <xsl:text>&#59;&#32;</xsl:text>
+                <xsl:value-of select="dim:field[@element='series'][@qualifier='numbering']"/>
+              </xsl:if>
+              <xsl:if test="dim:field[@element='series'][@qualifier='year']">
+                <xsl:text>&#44;&#32;</xsl:text>
+                <xsl:value-of select="dim:field[@element='series'][@qualifier='year']"/>
+              </xsl:if>
+            </div>
+          </div>
+          </div>
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="dim:dim[@dspaceType='ITEM']">
 
 
-	hello world!
 <!--
 	<xsl:for-each-group select="dim:field[@element='relation']" group-by="@qualifier">
 		<xsl value-of select="current-grouping-key" />
@@ -837,15 +862,31 @@
         </div>
     </xsl:template>
 
+<!--
     <xsl:template name="itemSummaryView-collections">
         <xsl:if test="$document//dri:referenceSet[@id='aspect.artifactbrowser.ItemViewer.referenceSet.collection-viewer']">
             <div class="simple-item-view-collections item-page-field-wrapper table">
                 <h5>
-                    <xsl:text>Collections</xsl:text>    <!--TODO i18n-->
+                    <xsl:text>Collections</xsl:text>
                 </h5>
                 <xsl:apply-templates select="$document//dri:referenceSet[@id='aspect.artifactbrowser.ItemViewer.referenceSet.collection-viewer']/dri:reference"/>
             </div>
         </xsl:if>
+    </xsl:template>
+-->
+
+    <xsl:template name="itemSummaryView-collections">
+      <xsl:if test="$document//dri:referenceSet[@id='aspect.artifactbrowser.ItemViewer.referenceSet.collection-viewer']">
+        <div class="row simple-item-view-collections item-page-field-wrapper table">
+          <div class="col-md-12">
+            <hr/>
+            <i18n:text>xmlui.ArtifactBrowser.ItemViewer.head_parent_collections</i18n:text>
+          <!-- </div> -->
+          <!-- <div class="col-md-8"> -->
+            <xsl:apply-templates select="$document//dri:referenceSet[@id='aspect.artifactbrowser.ItemViewer.referenceSet.collection-viewer']/dri:reference"/>
+          </div>
+        </div>
+      </xsl:if>
     </xsl:template>
 
     <xsl:template name="itemSummaryView-DIM-file-section">
