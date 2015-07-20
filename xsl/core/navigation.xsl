@@ -39,7 +39,8 @@
 
         <div id="ds-options" class="word-break">
             <xsl:choose>
-	      <xsl:when test="not(contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'discover'))">
+              <!-- Modified the following to hide global search from community and collection landing pages -->
+	      <xsl:when test="not(contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'discover')) and not(/dri:document/dri:body/dri:div[@n='collection-home']) and not(/dri:document/dri:body/dri:div[@n='community-home'])">
 		<xsl:if test="$search-only = '1'">
 
                 <div id="ds-search-option" class="ds-option-set">
@@ -137,7 +138,10 @@
 
 		<xsl:apply-templates select="dri:list[@n='discovery']"/>
 		<xsl:if test="not(contains(/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI'], 'discover'))">
+<!-- 
+     			Hiding this template because Browse is confusing
 			<xsl:apply-templates select="dri:list[@n='browse']"/>
+-->
 		</xsl:if>
 		<xsl:apply-templates select="dri:list[@n='context']"/>
 		<xsl:if test="/dri:document/dri:meta/dri:userMeta/@authenticated = 'yes'">

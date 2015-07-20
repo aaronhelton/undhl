@@ -93,6 +93,7 @@
         </div>
     </xsl:template>
 
+<!--
     <xsl:template match="dri:div[@id = 'aspect.artifactbrowser.ConfigurableBrowse.div.browse-controls'
     or @id='aspect.administrative.WithdrawnItems.div.browse-controls'
     or @id='aspect.administrative.PrivateItems.div.browse-controls']">
@@ -107,7 +108,6 @@
     </xsl:template>
 
     <xsl:template match="dri:div[starts-with(@id, 'aspect.discovery.SearchFacetFilter.div.browse-by-')][@pagination = 'simple']/dri:head"/>
-
 
     <xsl:template match="dri:list[@id='aspect.browseArtifacts.CommunityBrowse.list.community-browse' or @id='aspect.browseArtifacts.CollectionBrowse.list.collection-browse'][dri:head]">
         <div>
@@ -141,7 +141,7 @@
             <xsl:apply-templates select="dri:xref/*"/>
         </xref>
     </xsl:template>
-
+-->
     <xsl:template
             match="dri:field[@id='aspect.administrative.WithdrawnItems.field.rpp' or @id='aspect.administrative.PrivateItems.field.rpp']/dri:option">
 
