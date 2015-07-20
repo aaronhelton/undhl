@@ -31,6 +31,9 @@
     -->
     <xsl:variable name="request-uri" select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI']"/>
 
+    <!-- Make the userMeta available to other templates -->
+    <xsl:variable name="thisUserMeta" select="/dri:document/dri:meta/dri:userMeta"/>
+
     <!--
         The starting point of any XSL processing is matching the root element. In DRI the root element is document,
         which contains a version attribute and three top level elements: body, options, meta (in that order).
