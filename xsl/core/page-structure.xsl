@@ -172,10 +172,9 @@
 							</a>
 						</div>
                                                 <div class="col-md-3">
-							<!-- <h4><a href="/search-filter?field=topic">Topics</a></h4> -->
-							<h4><a href="/search-filter?field=topic"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_topic</i18n:text></a></h4>
-							<a href="/search-filter?field=topic">
-								<img src="/themes/undhl/images/cropped-129885.jpg"/>
+							<h4><a href="/search-filter?field=spatial"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_spatial</i18n:text></a></h4>
+							<a href="/search-filter?field=spatial">
+								<img src="/themes/undhl/images/regions-and-countries.png"/>
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
