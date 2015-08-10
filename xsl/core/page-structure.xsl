@@ -161,7 +161,7 @@
 					</div>
 
 
-					<h3><i18n:text>xmlui.ArtifactBrowser.Navigation.head_discover</i18n:text></h3> 
+					<!-- <h3><i18n:text>xmlui.ArtifactBrowser.Navigation.head_discover</i18n:text></h3> -->
 
 					<div class="row" id="home_browse_row">
 						<div class="col-md-3">
