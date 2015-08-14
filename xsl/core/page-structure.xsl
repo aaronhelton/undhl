@@ -347,6 +347,9 @@
             <link rel="stylesheet" href="/themes/undhl/styles/ksd_styles.css"/>
             <!-- /ksd styles -->
 
+            <!-- CSS for Services/popovers, etc -->
+            <link rel="stylesheet" href="{concat($theme-path, 'styles/services.css')}"/>
+
 	    <!-- jquery for the carousel -->
 <!--	
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -1070,6 +1073,8 @@
         </script>
 
         <script src="{$theme-path}/scripts/theme.js">&#160;</script>
+        <script src="{$theme-path}/scripts/oembed.js">&#160;</script>
+       
 
         <!-- Add javascipt specified in DRI -->
         <xsl:for-each select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='javascript'][not(@qualifier)]">

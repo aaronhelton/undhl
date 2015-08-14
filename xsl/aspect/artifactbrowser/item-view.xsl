@@ -104,6 +104,7 @@
 			    <xsl:call-template name="itemSummaryView-DIM-rights"/>
 			    <xsl:call-template name="itemSummaryView-DIM-identifier-uri"/>	
 			    <xsl:call-template name="itemSummaryView-DIM-symbol"/>
+			    <xsl:call-template name="itemSummaryView-Embed"/>
                             <div class="row">
                               <div class="col-xs-2 pull-left">
                                 <xsl:call-template name="itemSummaryView-DIM-thumbnail"/>
@@ -194,6 +195,50 @@
 			<xsl:value-of select="dim:field[@qualifier='symbol']/node()"/>
 		</div>
 	</div>
+    </xsl:template>
+
+    <xsl:template name="itemSummaryView-Embed">
+      <div class="row">
+        <div class="col-md-12">
+          <a href="#" id="oeToggle" class="btn btn-primary" data-toggle="modal" data-target="#oeModal">Embed</a>
+        </div>
+      </div>
+
+      <div id="oeModal" class="modal fade" data-backdrop="false">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Embed this Item</h4>
+            </div>
+            <div class="modal-body" id="oeModalStep1">
+              <div class="row">
+                <div class="col-md-12">
+                  <p>This widget generates an embed code for this item that you can use in your own web pages. Simply copy the embed code below and paste it where you want it to appear on your web page.</p>
+                </div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Embed Code:</label>
+                  <textarea class="form-control" id="oeCode"></textarea> 
+                </div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Preview:</label>
+                  <div class="col-md-12" id="oePreview">
+                    _
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </xsl:template>
 
     <xsl:template name="itemSummaryView-DIM-identifier-uri">
