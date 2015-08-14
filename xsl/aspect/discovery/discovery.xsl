@@ -23,6 +23,7 @@
 
     <xsl:template match="dri:list[@type='dsolist']" priority="2">
         <xsl:apply-templates select="dri:head"/>
+        <xsl:call-template name="list-oEmbed"/>
         <xsl:apply-templates select="*[not(name()='head')]" mode="dsoList"/>
     </xsl:template>
 
@@ -631,5 +632,48 @@
 
     </xsl:template>
 
+    <xsl:template name="list-oEmbed">
+      <div class="row">
+        <div class="col-md-12">
+          <button id="oeToggle" class="btn btn-primary" data-toggle="modal" data-target="#oeModal">Embed</button>
+        </div>
+      </div>
+
+      <div id="oeModal" class="modal fade" data-backdrop="false">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Embed this List</h4>
+            </div>
+            <div class="modal-body" id="oeModalStep1">
+              <div class="row">
+                <div class="col-md-12">
+                  <p>This widget generates an embed code for this item that you can use in your own web pages. Simply copy the embed code below and paste it where you want it to appear on your web page.</p>
+                </div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Embed Code:</label>
+                  <textarea class="form-control" id="oeCode"></textarea> 
+                </div>
+              </div>
+              <hr/>
+              <div class="row">
+                <div class="col-md-12">
+                  <label>Preview:</label>
+                  <div class="col-md-12" id="oePreview">
+                    _
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </xsl:template>
 
 </xsl:stylesheet>
