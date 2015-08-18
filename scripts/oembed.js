@@ -11,7 +11,7 @@ function init() {
   if ($( 'div#aspect_discovery_SimpleSearch_div_search-results' ).length) {
     disposition = 'list';
   }
-  var oeUrl = 'http://dag.un.org/services/oembed?url=' + encoded + '&maxheight=150&maxwidth=500&type=' + disposition;
+  var oeUrl = 'http://' + uHost + '/services/oembed?url=' + encoded + '&maxheight=150&maxwidth=500&type=' + disposition;
 
   $.get(oeUrl, function(data) {
     if(data['html']) {
