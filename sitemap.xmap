@@ -42,7 +42,7 @@
         -->
         <map:component-configurations>
             <global-variables>
-                <theme-path>undhl-svc</theme-path>
+                <theme-path>undhl</theme-path>
                 <theme-name>Mirage 2 Precompiled</theme-name>
             </global-variables>
         </map:component-configurations>
