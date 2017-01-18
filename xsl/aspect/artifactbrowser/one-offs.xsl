@@ -42,4 +42,7 @@
 
     </xsl:template>
 
+    <xsl:template match="dri:list[@rend='community-browse' or @rend='collection-browse']">
+    </xsl:template>
+
 </xsl:stylesheet>

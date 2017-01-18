@@ -31,6 +31,9 @@
     -->
     <xsl:variable name="request-uri" select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='request'][@qualifier='URI']"/>
 
+    <!-- Make the userMeta available to other templates -->
+    <xsl:variable name="thisUserMeta" select="/dri:document/dri:meta/dri:userMeta"/>
+
     <!--
         The starting point of any XSL processing is matching the root element. In DRI the root element is document,
         which contains a version attribute and three top level elements: body, options, meta (in that order).
@@ -158,29 +161,33 @@
 					</div>
 
 
-					<h3><i18n:text>xmlui.ArtifactBrowser.Navigation.head_discover</i18n:text></h3> 
+					<!-- <h3><i18n:text>xmlui.ArtifactBrowser.Navigation.head_discover</i18n:text></h3> -->
+                                        <br/>
 
 					<div class="row" id="home_browse_row">
 						<div class="col-md-3">
-							<h4><a href="/search-filter?field=issuingBody">UN Bodies</a></h4>
+							<!-- <h4><a href="/search-filter?field=issuingBody">UN Bodies</a></h4> -->
+							<h4><a href="/search-filter?field=issuingBody"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_issuingbody</i18n:text></a></h4>
 							<a href="/search-filter?field=issuingBody">
 								<img src="/themes/undhl/images/cropped-595698.jpg"/>
 							</a>
 						</div>
                                                 <div class="col-md-3">
-							<h4><a href="/search-filter?field=topic">Topics</a></h4>
-							<a href="/search-filter?field=topic">
-								<img src="/themes/undhl/images/cropped-129885.jpg"/>
+							<h4><a href="/search-filter?field=spatial"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_spatial</i18n:text></a></h4>
+							<a href="/search-filter?field=spatial">
+								<img src="/themes/undhl/images/regions-and-countries.png"/>
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
-							<h4><a href="/search-filter?field=series">Series</a></h4>
-							<a href="/search-filter?field=series">
+							<!-- <h4><a href="/search-filter?field=series">Series</a></h4> -->
+							<h4><a href="/community-list"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_series</i18n:text></a></h4>
+							<a href="/community-list">
 								<img src="/themes/undhl/images/cropped-YB-shadow.jpg" />
 							</a>
                                                 </div>
                                                 <div class="col-md-3">
-							<h4><a href="/search-filter?field=contentType">Content type</a></h4>	
+							<!-- <h4><a href="/search-filter?field=contentType">Content type</a></h4>	-->
+							<h4><a href="/search-filter?field=contentType"><i18n:text>xmlui.ArtifactBrowser.Navigation.browse_contenttype</i18n:text></a></h4>	
 							<a href="/search-filter?field=contentType">
 								<img src="/themes/undhl/images/cropped-492744.jpg" />			
 							</a>
@@ -340,6 +347,9 @@
             <link rel="stylesheet" href="/themes/undhl/styles/ksd_styles.css"/>
             <!-- /ksd styles -->
 
+            <!-- CSS for Services/popovers, etc -->
+            <link rel="stylesheet" href="{concat($theme-path, 'styles/services.css')}"/>
+
 	    <!-- jquery for the carousel -->
 <!--	
 	    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -476,12 +486,12 @@
                                 <div class="col-md-6" id="brand_language_selector">
                                         <div class="content">
                                                 <ul class="language-switcher-locale-url">
-                                                        <li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar"> ﻉﺮﺒﻳ  </a></li>
-                                                        <li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li>
-                                                        <li class="en"><a href="http://www.un.org/" class="language-link" lang="en" xml:lang="en">English</a></li>
-                                                        <li class="fr"><a href="http://www.un.org/fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
-                                                        <li class="ru"><a href="http://www.un.org/ru" class="language-link" lang="ru" xml:lang="ru">Русский</a></li>
-                                                        <li class="es last"><a href="http://www.un.org/es" class="language-link" lang="es" xml:lang="es">Español</a></li>
+                                                        <!-- <li class="ar first"><a href="http://www.un.org/ar" class="language-link" lang="ar" xml:lang="ar">عربي</a></li>-->
+                                                        <!-- <li class="zh-hans"><a href="http://www.un.org/zh" class="language-link" lang="zh-hans" xml:lang="zh-hans">中文</a></li> -->
+                                                        <li class="en"><a href="/?locale-attribute=en" class="language-link" lang="en" xml:lang="en">English</a></li>
+                                                        <li class="fr"><a href="/?locale-attribute=fr" class="language-link" lang="fr" xml:lang="fr">Français</a></li>
+                                                        <!-- <li class="ru"><a href="http://www.un.org/ru" class="language-link" lang="ru" xml:lang="ru">Русский</a></li>-->
+                                                        <li class="es last"><a href="/?locale-attribute=es" class="language-link" lang="es" xml:lang="es">Español</a></li>
                                                 </ul>
                                         </div>
                                 </div>
@@ -503,7 +513,7 @@
 				</div>
 			</div>
 			<div class="col-md-6" id="dhl_dr_logo">
-				<h1><a href="/">DAG Repository</a></h1>	
+				<h1><a href="/"><i18n:text>xmlui.general.dspace_home</i18n:text></a></h1>	
 			</div>	
                     </div>			
 
@@ -514,6 +524,7 @@
 			   <ul class="nav nav-pills pull-left bodies_list">
 				<!-- <li><a href="">General Assembly</a></li> -->
 				<li class="dropdown">
+                                        <!-- To do: internationalize these -->
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						Security Council<span class="caret"></span>
 					</a>
@@ -926,6 +937,7 @@
     </xsl:template>
 
     <!-- Like the header, the footer contains various miscellaneous text, links, and image placeholders -->
+    <!-- To do: internationalize these as well -->
     <xsl:template name="buildFooter">
         <footer>
                 <div class="row">
@@ -1061,6 +1073,8 @@
         </script>
 
         <script src="{$theme-path}/scripts/theme.js">&#160;</script>
+        <script src="{$theme-path}/scripts/oembed.js">&#160;</script>
+       
 
         <!-- Add javascipt specified in DRI -->
         <xsl:for-each select="/dri:document/dri:meta/dri:pageMeta/dri:metadata[@element='javascript'][not(@qualifier)]">
