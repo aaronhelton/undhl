@@ -102,8 +102,9 @@
 
         		<div class="item-summary-view-metadata">
                             <xsl:call-template name="itemSummaryView-DIM-rights"/>
-			    <xsl:call-template name="itemSummaryView-DIM-rights"/>
+                            <!-- 
 			    <xsl:call-template name="itemSummaryView-DIM-identifier-uri"/>	
+                            -->
 			    <xsl:call-template name="itemSummaryView-DIM-symbol"/>
 			    <xsl:call-template name="itemSummaryView-Embed"/>
                             <div class="row">
@@ -736,7 +737,6 @@
                       </div>
                     </div>
                 </xsl:if>
-		</xsl:if>
 		<xsl:if test="dim:field[@element='relation'][@qualifier='report']">
                     <div class="row">
                       <div class="col-md-2">
